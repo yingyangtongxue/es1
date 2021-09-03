@@ -1,6 +1,8 @@
 <?php
 
-Class homeController extends Controller{
+namespace App\Controllers;
+
+class cadastroController{
 
     public function index()
     {

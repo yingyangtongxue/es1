@@ -1,6 +1,8 @@
 <?php
 
-Class Controller{
+namespace App\Core;
+
+class Controller{
 
     public function __construct()
     {

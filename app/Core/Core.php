@@ -1,6 +1,8 @@
 <?php
 
-Class Core{
+namespace App\Core;
+
+class Core{
 
     public function __construct()
     {
@@ -8,7 +10,7 @@ Class Core{
     }
 
     public function run(){
-
+        
     }
 
 
