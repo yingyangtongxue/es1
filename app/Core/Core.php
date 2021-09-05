@@ -39,7 +39,7 @@ class Core{
             $controller = $url[0].'Controller';
             array_shift($url);
 
-            if(isset($url[0]) &&  $url[0]!= "" && !empty($url))
+            if(isset($url[0]) && $url[0] != "" && !empty($url))
             {
                 $method = $url[0];
                 array_shift($url);

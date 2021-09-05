@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Views;
 
 class cadastroController extends Controller{
 
@@ -10,7 +11,10 @@ class cadastroController extends Controller{
 
     public static function index()
     {
-      echo 'cadastro';
+      echo Views::render("template_usp","cadastro", [
+        'URL' => '<base href="'.getenv('URL').'">',
+        'title' => 'Cadastro'
+      ]);
     }
 
 }

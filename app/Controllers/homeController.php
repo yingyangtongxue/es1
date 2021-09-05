@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Views;
 
 class homeController extends Controller{
 
@@ -10,7 +11,10 @@ class homeController extends Controller{
 
     public static function index()
     {
-        echo 'home';
+        echo Views::render("template_usp","home", [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Sistema'
+          ]);
     }
 
 }

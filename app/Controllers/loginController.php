@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Views;
 
 
 class loginController extends Controller{
@@ -11,7 +12,10 @@ class loginController extends Controller{
 
     public static function index()
     {
-       echo "login" ;
+        echo Views::render("template_usp","login", [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Login'
+          ]);
     }
 
 }
