@@ -6,6 +6,5 @@ use \App\Core\Core;
 
 
 $c = new Core();
-$c->run();
 
 ?>

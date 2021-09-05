@@ -4,13 +4,14 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class cadastroController extends Controller{
+
+class erroController extends Controller{
 
     public function __construct() {}
 
     public static function index()
     {
-      echo 'cadastro';
+      echo 'Erro: Página não encontrada';
     }
 
 }

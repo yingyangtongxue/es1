@@ -2,14 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Core\Controller;
 
-class homeController{
+class homeController extends Controller{
 
-    public function index()
+    public function __construct() {}
+
+    public static function index()
     {
-        
+        echo 'home';
     }
 
-   
 }
 
