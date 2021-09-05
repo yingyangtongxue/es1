@@ -10,14 +10,14 @@ class Connection
 
     private static $con;
 
-    private static function __construct(){}
+    public function __construct(){}
 
-    private static function getConnection()
+    public static function getConnection()
     {
-        $dbname = '';
-        $host = 'localhost';
-        $user = 'root';
-        $password = '';
+        $dbname = getenv('DBNAME');
+        $host = getenv('HOST');
+        $user = getenv('USER');
+        $password = getenv('PASSWORD');
 
         if (!isset(self::$con)) {
             try {
