@@ -31,3 +31,4 @@ class cadastroController extends Controller{
 
 }
 
+?>
