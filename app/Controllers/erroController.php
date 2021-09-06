@@ -16,3 +16,4 @@ class erroController extends Controller{
 
 }
 
+?>
