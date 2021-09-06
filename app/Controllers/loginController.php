@@ -27,5 +27,3 @@ class loginController extends Controller{
     }
 
 }
-
-?>
