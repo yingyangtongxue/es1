@@ -31,3 +31,5 @@ class Connection
         return self::$con;
     }
 }
+
+?>
