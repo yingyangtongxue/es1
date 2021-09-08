@@ -146,11 +146,17 @@ ul.list-anchor {
 }
 
 .list-anchor li {
-    padding-top: 2rem;
+    font-size: 0.8rem;
+    padding-top: 0.6rem;
 }
 
 .list-anchor li a {
     text-decoration: none;
+}
+
+.list-anchor li+li {
+    border-top: 1px solid var(--bg);
+    border-bottom: 1px solid var(--bg);
 }
 
 .username {
@@ -167,14 +173,17 @@ ul.list-anchor {
 }
 
 .main-container {
+    margin-top: -22rem;
     width: 100%;
     display: flex;
-    align-items: flex-start;
+    min-height: 70vh;
+    flex-direction: column;
     justify-content: center;
 }
 
+
 .main-container div {
-    margin-top: 3rem;
+    margin: 2rem auto;
     width: 80%;
     border: 1px solid var(--bg);
 }
@@ -186,6 +195,7 @@ ul.list-anchor {
 .main-container div ul li p {
     padding: 0.4rem;
     font-weight: 500;
+    font-size: 0.7rem;
     cursor: pointer;
 }
 
