@@ -21,7 +21,13 @@ class cadastroController extends Controller{
 
     public static function cadastrar()
     {
-      User::cadastro('orientador');
+      if (isset($_POST['email']) && isset($_POST['password']))
+      {
+        User::cadastro('orientador');
+      }
+      else{
+        header('Location: '.getenv('URL') .'cadastro');
+      }
     }
 
     public static function getMethods()

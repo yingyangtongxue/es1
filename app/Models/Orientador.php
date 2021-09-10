@@ -11,27 +11,22 @@ class Orientador
 
     public static function cadastro()
     {
-        if (isset($_POST['email']) && isset($_POST['password'])){
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $cpassword = $_POST['cpassword'];
-            isset($_POST['CCPconfirm']) ? $CCPconfirm = 1 : $CCPconfirm = 0;
-
-
-            if (!self::confirmPassword($password, $cpassword)){
-                header('Location: '.getenv('URL') .'cadastro');
-            }
-
-            $conn = Connection::getConnection();
-
-            if(!$id = self::checkEmail($conn, $email)){
-                header('Location: '.getenv('URL').'cadastro');
-            }
-
-            self::insertPerson($conn, $name, $id, $password, $CCPconfirm);
-            header('Location: '.getenv('URL'));
+       
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
+        isset($_POST['CCPconfirm']) ? $CCPconfirm = 1 : $CCPconfirm = 0;
+        if (!self::confirmPassword($password, $cpassword)){
+            header('Location: '.getenv('URL') .'cadastro');
         }
+        $conn = Connection::getConnection();
+        if(!$id = self::checkEmail($conn, $email)){
+            header('Location: '.getenv('URL').'cadastro');
+        }
+        self::insertPerson($conn, $name, $id, $password, $CCPconfirm);
+        header('Location: '.getenv('URL'));
+        
     }
     
     private static function confirmPassword($pass, $cpass)

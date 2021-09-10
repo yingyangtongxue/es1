@@ -19,7 +19,13 @@ class loginController extends Controller{
     }
 
     public static function autentication(){
-        User::login();
+        if (isset($_POST['email']) && isset($_POST['password']))
+        {
+            User::login();
+        }
+        else{
+            header('Location: '.getenv('URL') .'login');
+        }
     }
 
     public static function getMethods(){

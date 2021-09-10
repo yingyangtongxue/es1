@@ -13,16 +13,13 @@ class Autentication
 
     public static function login()
     {
-        if (isset($_POST['email']) && isset($_POST['password'])){
-        
-            $email = $_POST['email'];
-            $senha = $_POST['password'];
-            $conn = Connection::getConnection();
+        $email = $_POST['email'];
+        $senha = $_POST['password'];
+        $conn = Connection::getConnection();
             
-            if(!$id = self::searchID($conn, $email)) return null;
+        if(!$id = self::searchID($conn, $email)) return null;
 
-            return self::validatePerson($conn, $id, $senha);
-        }
+        return self::validatePerson($conn, $id, $senha);
     }
 
     private static function searchID($conn, $email){
@@ -38,19 +35,24 @@ class Autentication
     }
 
     private static function validateOrientador($conn, $id, $senha){
-        $query = "SELECT pr.id_orientador
+        $query = "SELECT pr.id_orientador, pr._cpp
             FROM pessoa as p 
                 inner join orientador as pr
                 on p.id_pessoa = pr.id_pessoa
             WHERE p.id_pessoa = '{$id}' AND pr.senha = MD5('{$senha}');";
         $id_orientador = 0;
+        $ccp = 0;
         $result = $conn->query($query);
 
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
+                {
                     $id_orientador = $row['id_orientador'];
+                    $ccp = $row['_cpp'];
+                }
 
-        return $id_orientador;
+        
+        return array($id_orientador, $ccp);
     }
 
     private static function validateOrientando($conn, $id, $senha){
@@ -71,7 +73,11 @@ class Autentication
 
     private static function validatePerson($conn, $id_pessoa, $senha){
         $id = self::validateOrientador($conn, $id_pessoa, $senha);
-        if($id) return array("userId"=>$id, "userType"=>"Orientador");
+        if($id[0]) 
+        {
+            if($id[1]) return array("userId"=>$id[0], "userType"=>"CCP");
+            else return array("userId"=>$id[0], "userType"=>"Orientador");
+        }
 
         $id = self::validateOrientando($conn, $id_pessoa, $senha);
         return ($id) ? array("userId"=>$id, "userType"=>"Orientando") :  null;
