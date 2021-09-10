@@ -20,7 +20,7 @@ class Orientador
 
 
             if (!self::confirmPassword($password, $cpassword)){
-                header('Location: '.getenv('URL').'cadastro');
+                header('Location: '.getenv('URL') .'cadastro');
             }
 
             $conn = Connection::getConnection();

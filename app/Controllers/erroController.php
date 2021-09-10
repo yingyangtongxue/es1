@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-
+use App\Core\Views;
 
 class erroController extends Controller{
 
@@ -11,7 +11,10 @@ class erroController extends Controller{
 
     public static function index()
     {
-      echo 'Erro: Página não encontrada';
+      echo Views::render("template_erro","", [
+        'URL' => '<base href="'.getenv('URL').'">',
+        'title' => '404 | Erro'
+      ]);
     }
 
 }
