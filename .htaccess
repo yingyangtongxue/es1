@@ -10,6 +10,8 @@ Options -Indexes
     Allow from all
 </FilesMatch>
 
+ErrorDocument 403 /es1/erro/index/403
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -11,7 +11,7 @@ class cadastroController extends Controller{
 
     public function __construct() {}
 
-    public static function index()
+    public static function index($params)
     {
       echo Views::render("template_usp","cadastro", [
         'URL' => '<base href="'.getenv('URL').'">',

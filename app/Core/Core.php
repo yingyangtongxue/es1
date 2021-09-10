@@ -29,7 +29,7 @@ class Core{
 
     private function getURLInfo($url){
 
-        $params = null;
+        $params = array(null);
 
         if(!empty($url))
         {
@@ -72,6 +72,7 @@ class Core{
         {
             $url['controller'] = 'erroController'; 
             $url['method'] = 'index';
+            $url['params'] = '404';
         }
         elseif(file_exists($path)){
            
@@ -80,6 +81,7 @@ class Core{
             if(array_search($url['method'], $methods) === false or $url['method'] == "getMethods"){
                 $url['controller'] = 'erroController'; 
                 $url['method'] = 'index';
+                $url['params'] = '404';
             } 
         }
 

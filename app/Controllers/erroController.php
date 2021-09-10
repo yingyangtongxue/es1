@@ -9,11 +9,16 @@ class erroController extends Controller{
 
     public function __construct() {}
 
-    public static function index()
+    public static function index($error)
     {
-      echo Views::render("template_erro","", [
+
+      $error = $error[0];
+      if(!isset($error) || empty($error) ||$error == null) $error = '404';
+      else if($error != "404" && $error != "403") $error = '404';
+       
+      echo Views::render("template_erro","error{$error}", [
         'URL' => '<base href="'.getenv('URL').'">',
-        'title' => '404 | Erro'
+        'title' => "{$error} | Erro"
       ]);
     }
 
