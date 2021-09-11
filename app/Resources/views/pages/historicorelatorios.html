@@ -5,11 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="http://localhost/es1/">
+    <script src="https://kit.fontawesome.com/0476c40118.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="app/Resources/css/style.css">
     <title>Document</title>
 </head>
 
 <body>
+    <header class="header">
+        <div class="image-container">
+            <img src="app/Resources/images/eachLogo.png" alt="EACH USP">
+        </div>
+        <div class="username">
+            <p>Nome do usuário</p>
+            <a href=""><i class="far fa-times-circle"></i></a>
+        </div>
+    </header>
 
+    <section style="display: flex;">
+        <aside class="sidebar">
+            <ul class="list-anchor">
+                <li><a href="">Relatórios Pendentes</a></li>
+                <li><a href="">Histórico de Relatórios</a></li>
+            </ul>
+        </aside>
+        <div class="main-container">
+            <h1 style="color:#1094AB; width: 100%;text-align: center;">Histórico de Relatórios</h1>
+            <div>
+                <ul>
+                    <li>
+                        <p class="modalbutton">
+                            relatório de fulano
+                        </p>
+                    </li>
+                    <li>
+                        <p class="modalbutton">
+                            relatório de fulano
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="file">
+                <a href=""><i class="fas fa-paperclip"></i></a>
+                <p>relatório de fulano</p>
+            </div>
+            <div style="color:#1094AB;margin-top: 2rem;">
+                <h2 style="font-size: 1rem;">Nota Atribuida: </h2>
+                <p style="font-size: 0.8rem;margin-top: 2rem;"><strong>Comentário: </strong></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="app/Resources/js/script.js"></script>
 </body>
 
 </html>

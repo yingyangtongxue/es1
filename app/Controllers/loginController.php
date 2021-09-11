@@ -14,7 +14,7 @@ class loginController extends Controller{
     {
         echo Views::render("template_usp","login", [
             'URL' => '<base href="'.getenv('URL').'">',
-            'title' => 'Login'
+            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Login'
           ]);
     }
 

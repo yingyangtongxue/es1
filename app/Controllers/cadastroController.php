@@ -15,7 +15,7 @@ class cadastroController extends Controller{
     {
       echo Views::render("template_usp","cadastro", [
         'URL' => '<base href="'.getenv('URL').'">',
-        'title' => 'Cadastro'
+        'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro'
       ]);
     }
 
