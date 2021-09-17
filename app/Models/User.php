@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Utils\POSTData;
+
 class User
 {
 
@@ -32,7 +34,8 @@ class User
     {
         if($person == 'orientador') 
         {
-            $status = Orientador::cadastro();
+            $data = POSTData::postCadastroOrientador();
+            $status = Orientador::cadastro($data);
 
             if($status === true){
                 header('Location: '.getenv('URL') .'home');

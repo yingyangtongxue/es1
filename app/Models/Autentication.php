@@ -35,7 +35,7 @@ class Autentication
     }
 
     private static function validateOrientador($conn, $id, $senha){
-        $query = "SELECT pr.id_orientador, pr._cpp
+        $query = "SELECT pr.id_orientador, pr._cpp, p.nome
             FROM pessoa as p 
                 inner join orientador as pr
                 on p.id_pessoa = pr.id_pessoa
@@ -56,7 +56,7 @@ class Autentication
     }
 
     private static function validateOrientando($conn, $id, $senha){
-        $query = "SELECT a.id_orientando
+        $query = "SELECT a.id_orientando, p.nome
             FROM pessoa as p 
                 inner join orientando as a
                 on p.id_pessoa = a.id_pessoa
@@ -72,15 +72,15 @@ class Autentication
     }
 
     private static function validatePerson($conn, $id_pessoa, $senha){
-        $id = self::validateOrientador($conn, $id_pessoa, $senha);
-        if($id[0]) 
+        $pessoa = self::validateOrientador($conn, $id_pessoa, $senha);
+        if($pessoa[0]) 
         {
-            if($id[1]) return array("userId"=>$id[0], "userType"=>"CCP");
-            else return array("userId"=>$id[0], "userType"=>"Orientador");
+            if($pessoa[1]) return array("userId"=>$pessoa[0], "userType"=>"CCP");
+            else return array("userId"=>$pessoa[0], "userType"=>"Orientador");
         }
 
-        $id = self::validateOrientando($conn, $id_pessoa, $senha);
-        return ($id) ? array("userId"=>$id, "userType"=>"Orientando") :  null;
+        $pessoa = self::validateOrientando($conn, $id_pessoa, $senha);
+        return ($pessoa) ? array("userId"=>$pessoa, "userType"=>"Orientando") :  null;
     }
     
        

@@ -3,40 +3,37 @@
 namespace App\Models;
 
 use PDO;
-use App\Models\Errors\ConfirmPasswordException;
-use App\Models\Errors\CheckEmailException;
+use App\Utils\Errors\ConfirmPasswordException;
+use App\Utils\Errors\CheckEmailException;
+use App\Utils\Errors\PersonAlreadyUsedException;
+use PDOException;
 
 class Orientador
 {
 
     public function __construct(){}
 
-    public static function cadastro()
+    public static function cadastro($data)
     {
        
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $cpassword = $_POST['cpassword'];
-        isset($_POST['CCPconfirm']) ? $CCPconfirm = 1 : $CCPconfirm = 0;
-
         try {
 
-            if (!self::confirmPassword($password, $cpassword)){
-                throw new ConfirmPasswordException();
-            }
+            if (!self::confirmPassword($data["password"], $data["cpassword"])) throw new ConfirmPasswordException();
+            
     
             $conn = Connection::getConnection();
     
-            if(!$id = self::checkEmail($conn, $email)){
-                throw new CheckEmailException();
-            }
+            if(!$id = self::checkEmail($conn, $data["email"])) throw new CheckEmailException();
     
-            return self::insertPerson($conn, $name, $id, $password, $CCPconfirm);
+            if(!self::insertPerson($conn, $data["name"], $id, $data["password"], $data["CCPconfirm"])) throw new PersonAlreadyUsedException();
+
+            return true;
 
         } catch (ConfirmPasswordException $e) {
             return $e;
         } catch (CheckEmailException $e) {
+            return $e;
+        } catch (PersonAlreadyUsedException $e) {
             return $e;
         }
     }
@@ -63,8 +60,16 @@ class Orientador
     {
         $query = "INSERT INTO orientador (_cpp, user, senha, id_pessoa) 
             VALUES ({$CCPconfirm},'{$name}', MD5('{$password}'), {$id});";
-        $conn->query($query);
 
+        try{
+            $conn->query($query);
+        }
+        catch(PDOException $e){
+            if($e->getCode() == 23000){
+                return false;
+            }
+        }
+        
         return true;
     }
        

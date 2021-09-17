@@ -12,10 +12,20 @@ class loginController extends Controller{
 
     public static function index($params)
     {
-        echo Views::render("template_usp","login", [
+        session_start();
+        $error = "";
+        if(isset($_SESSION["error"])) 
+        {
+          $error = '<div class="error">'.$_SESSION["error"].'</div>';
+          unset($_SESSION["error"]);
+        }
+
+        $page = Views::render("template_usp","login", [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Login'
           ]);
+
+        echo str_replace('{{error}}', $error, $page);
     }
 
     public static function autentication(){
