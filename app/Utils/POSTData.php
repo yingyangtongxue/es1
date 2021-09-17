@@ -7,6 +7,14 @@ class POSTData{
 
     public function __construct(){}
 
+    public static function postLoginInfo(){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        unset($_POST['email'], $_POST['password']);
+
+        return array("email" => $email, "password" => $password);
+    }
+
     public static function postCadastroOrientador()
     {
         $name = $_POST['name'];

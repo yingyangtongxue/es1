@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Connection;
+use App\Utils\Errors\IncorrectLoginException;
 use PDO;
 
 
@@ -11,15 +12,22 @@ class Autentication
 
     public function __construct(){}
 
-    public static function login()
+    public static function login($data)
     {
-        $email = $_POST['email'];
-        $senha = $_POST['password'];
+        
         $conn = Connection::getConnection();
-            
-        if(!$id = self::searchID($conn, $email)) return null;
 
-        return self::validatePerson($conn, $id, $senha);
+        try{
+            if(!$id = self::searchID($conn, $data["email"])) throw new IncorrectLoginException();
+
+            if(!$info = self::validatePerson($conn, $id, $data["password"])) throw new IncorrectLoginException();
+
+            return $info;
+        }
+        catch(IncorrectLoginException $e){
+            return $e;
+        }   
+        
     }
 
     private static function searchID($conn, $email){
@@ -39,9 +47,10 @@ class Autentication
             FROM pessoa as p 
                 inner join orientador as pr
                 on p.id_pessoa = pr.id_pessoa
-            WHERE p.id_pessoa = '{$id}' AND pr.senha = MD5('{$senha}');";
+            WHERE p.id_pessoa = {$id} AND pr.senha = MD5('{$senha}');";
         $id_orientador = 0;
         $ccp = 0;
+        $name = "";
         $result = $conn->query($query);
 
         if($result)
@@ -49,10 +58,11 @@ class Autentication
                 {
                     $id_orientador = $row['id_orientador'];
                     $ccp = $row['_cpp'];
+                    $name = $row['nome'];
                 }
 
         
-        return array($id_orientador, $ccp);
+        return array($id_orientador, $ccp, $name);
     }
 
     private static function validateOrientando($conn, $id, $senha){
@@ -60,27 +70,31 @@ class Autentication
             FROM pessoa as p 
                 inner join orientando as a
                 on p.id_pessoa = a.id_pessoa
-            WHERE p.id_pessoa = '{$id}' AND a.senha = MD5('{$senha}');";
+            WHERE p.id_pessoa = {$id} AND a.senha = MD5('{$senha}');";
         $id_orientando= 0;
+        $name = "";
         $result = $conn->query($query);
 
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
+                {
                     $id_orientando = $row['id_orientando'];
+                    $name = $row['nome'];
+                }
 
-        return $id_orientando;
+        return array($id_orientando, $name);
     }
 
-    private static function validatePerson($conn, $id_pessoa, $senha){
-        $pessoa = self::validateOrientador($conn, $id_pessoa, $senha);
-        if($pessoa[0]) 
+    private static function validatePerson($conn, $id_person, $senha){
+        $person = self::validateOrientador($conn, $id_person, $senha);
+        if($person[0]) 
         {
-            if($pessoa[1]) return array("userId"=>$pessoa[0], "userType"=>"CCP");
-            else return array("userId"=>$pessoa[0], "userType"=>"Orientador");
+            if($person[1]) return array("userId"=>$person[0], "userType"=>"CCP", "nome" => $person[2]);
+            else return array("userId"=>$person[0], "userType"=>"Orientador", "nome" => $person[2]);
         }
 
-        $pessoa = self::validateOrientando($conn, $id_pessoa, $senha);
-        return ($pessoa) ? array("userId"=>$pessoa, "userType"=>"Orientando") :  null;
+        $person = self::validateOrientando($conn, $id_person, $senha);
+        return ($person[0]) ? array("userId"=>$person[0], "userType"=>"Orientando", "nome" => $person[1]) :  null;
     }
     
        
