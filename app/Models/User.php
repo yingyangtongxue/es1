@@ -30,7 +30,23 @@ class User
 
     public static function cadastro($person)
     {
-        $person == 'orientador' ? Orientador::cadastro() : "";
+        if($person == 'orientador') 
+        {
+            $status = Orientador::cadastro();
+
+            if($status === true){
+                header('Location: '.getenv('URL') .'home');
+            }
+            else
+            {
+                session_start();
+                $_SESSION["error"] = $status->errorMessage();
+                header('Location: '.getenv('URL') .'cadastro');
+            }
+        }
+        else{
+
+        }    
     }
  
 }

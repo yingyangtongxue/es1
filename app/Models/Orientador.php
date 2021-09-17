@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use PDO;
+use App\Models\Errors\ConfirmPasswordException;
+use App\Models\Errors\CheckEmailException;
 
 class Orientador
 {
@@ -17,16 +19,26 @@ class Orientador
         $password = $_POST['password'];
         $cpassword = $_POST['cpassword'];
         isset($_POST['CCPconfirm']) ? $CCPconfirm = 1 : $CCPconfirm = 0;
-        if (!self::confirmPassword($password, $cpassword)){
-            header('Location: '.getenv('URL') .'cadastro');
+
+        try {
+
+            if (!self::confirmPassword($password, $cpassword)){
+                throw new ConfirmPasswordException();
+            }
+    
+            $conn = Connection::getConnection();
+    
+            if(!$id = self::checkEmail($conn, $email)){
+                throw new CheckEmailException();
+            }
+    
+            return self::insertPerson($conn, $name, $id, $password, $CCPconfirm);
+
+        } catch (ConfirmPasswordException $e) {
+            return $e;
+        } catch (CheckEmailException $e) {
+            return $e;
         }
-        $conn = Connection::getConnection();
-        if(!$id = self::checkEmail($conn, $email)){
-            header('Location: '.getenv('URL').'cadastro');
-        }
-        self::insertPerson($conn, $name, $id, $password, $CCPconfirm);
-        header('Location: '.getenv('URL'));
-        
     }
     
     private static function confirmPassword($pass, $cpass)
