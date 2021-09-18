@@ -12,7 +12,7 @@ class User
     public static function login()
     {
         $data = POSTData::postLoginInfo();
-        $auth = Autentication::login($data);
+        $auth = Autentication::login($data["email"], $data["password"]);
 
         if(is_array($auth))
         {
@@ -39,7 +39,7 @@ class User
         if($person == 'orientador') 
         {
             $data = POSTData::postCadastroOrientador();
-            $status = Orientador::cadastro($data);
+            $status = Orientador::cadastro($data["name"], $data["email"], $data["password"], $data["cpassword"], $data["CCPconfirm"]);
 
             if($status === true){
                 header('Location: '.getenv('URL') .'home');

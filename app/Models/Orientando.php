@@ -8,6 +8,7 @@ use App\Utils\Errors\ConfirmPasswordException;
 use App\Utils\Errors\CheckEmailException;
 use App\Utils\Errors\PersonAlreadyUsedException;
 
+
 class Orientador
 {
     private $id;
@@ -20,19 +21,22 @@ class Orientador
         $this->ccpConfirm = $ccpConfirm;
     }
 
-    public static function cadastro($name, $email, $password, $cpassword, $ccpConfirm)
+
+    public static function cadastro($data)
     {
        
         try {
 
-            if (!self::confirmPassword($password,$cpassword)) throw new ConfirmPasswordException();
+            if (!self::confirmPassword($data["password"], $data["cpassword"])) throw new ConfirmPasswordException();
             
     
             $conn = Connection::getConnection();
     
-            if(!$id = self::checkEmail($conn, $email)) throw new CheckEmailException();
+            if(!$id = self::checkEmail($conn, $data["email"])) throw new CheckEmailException();
+
+            //To-Do: Verificar se Orientador Associado Existe
     
-            if(!self::insertOrientador($conn, $name, $id, $password, $ccpConfirm)) throw new PersonAlreadyUsedException();
+            if(!self::insertOrientando($conn, $data["ra"], $data["name"], $data["password"],  $id, $data["id_orientador"])) throw new PersonAlreadyUsedException();
 
             return true;
 
@@ -63,10 +67,11 @@ class Orientador
         return $id_pessoa;
     }
 
-    private static function insertOrientador($conn, $name, $id_pessoa, $password, $CCPconfirm)
+    private static function insertOrientando($conn, $ra, $name, $password, $id_pessoa, $id_orientador)
     {
-        $query = "INSERT INTO orientador (_cpp, user, senha, id_pessoa) 
-            VALUES ({$CCPconfirm},'{$name}', MD5('{$password}'), {$id_pessoa});";
+        $query = "INSERT INTO orientando (ra, user, senha, id_pessoa, id_orientador) 
+            VALUES ('{$ra}', '{$name}', MD5('{$password}'), {$id_pessoa}, {$id_orientador});";
+
 
         try{
             $conn->query($query);
@@ -79,7 +84,6 @@ class Orientador
         
         return true;
     }
-
 
     //Getters
     public function getId(){

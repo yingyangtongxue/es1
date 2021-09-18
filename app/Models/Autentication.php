@@ -12,15 +12,15 @@ class Autentication
 
     public function __construct(){}
 
-    public static function login($data)
+    public static function login($email, $password)
     {
         
         $conn = Connection::getConnection();
 
         try{
-            if(!$id = self::searchID($conn, $data["email"])) throw new IncorrectLoginException();
+            if(!$id = self::searchID($conn, $email)) throw new IncorrectLoginException();
 
-            if(!$info = self::validatePerson($conn, $id, $data["password"])) throw new IncorrectLoginException();
+            if(!$info = self::validatePerson($conn, $id, $password)) throw new IncorrectLoginException();
 
             return $info;
         }
