@@ -25,26 +25,28 @@
     <section style="display: flex;">
         <aside class="sidebar">
             <ul class="list-anchor">
-                <li><a href="">Relatórios Pendentes</a></li>
+                <li><a href="">Gerenciar Relatórios</a></li>
                 <li><a href="">Histórico de Relatórios</a></li>
             </ul>
         </aside>
         <div class="main-container">
-            <h1 style="color:#1094AB; width: 100%;text-align: center;">Histórico de Relatórios</h1>
+            <h1 style="color:#1094AB; width: 100%;text-align: center;">Gerenciar Relatórios</h1>
             <div>
-                <ul>
+                <ul id="relatorios-orientando">
                     <li>
                         <p class="modalbutton">
-                            relatório de fulano
+                            relatório 1
                         </p>
                     </li>
                     <li>
                         <p class="modalbutton">
-                            relatório de fulano
+                            relatório 2
                         </p>
                     </li>
                 </ul>
+
             </div>
+            <button id="novo-relatorio" class="btn">Novo Relatório</button>
         </div>
     </section>
 
@@ -56,10 +58,17 @@
                 <a href=""><i class="fas fa-paperclip"></i></a>
                 <p>relatório de fulano</p>
             </div>
-            <div style="color:#1094AB;margin-top: 2rem;">
-                <p><h2 style="font-size: 1rem;">Nota Atribuida: </h2> </p>
-                <p style="font-size: 0.8rem;margin-top: 2rem;"><strong>Comentário: </strong></p>
-            </div>
+            <form action="" method="post">
+                <label for="select">Atribuir Nota:</label>
+                <select name="select">
+                    <option value="null" selected></option>
+                    <option value="1">ADEQUADO</option>
+                    <option value="2">ADEQUADO COM RESSALVAS</option>
+                    <option value="3">INSATISFATÓRIO</option>
+                </select>
+                <textarea name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
+                <button class="btn btn-bg" type="submit">Confirmar</button>
+            </form>
         </div>
 
     </div>

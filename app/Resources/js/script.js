@@ -20,3 +20,12 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+let btnRelatorio = document.querySelector("#novo-relatorio")
+
+btnRelatorio.addEventListener('click', () =>{
+    let item = document.createElement('li')
+    let buttonModal = document.createElement('p')
+    buttonModal.classList.add('modalbutton')
+    item.appendChild(buttonModal)
+})

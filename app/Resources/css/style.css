@@ -75,7 +75,7 @@ a {
 .btn {
     transition: 0.4s ease-in-out;
     cursor: pointer;
-    padding: 0.7rem 5rem;
+    padding: 0.7rem 6.7rem;
     border-radius: 0.5rem;
     color: var(--bg);
     font-weight: 700;

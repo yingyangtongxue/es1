@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<div class="form-container">
+    {{error}}
+    <h1>Cadastrar Orientando</h1>
+    <form action="cadastro/cadastrar" method="post">
+        <div>
+            <label for="name">Nome de Usuário:</label>
+            <input type="text" name="name" id="" required>
+        </div>
+        <div>
+            <label for="email">Email Institucional:</label>
+            <input type="email" name="email" id="" required>
+        </div>
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" id="" required>
+        </div>
+        <div>
+            <label for="cpassword">Confirmar Senha:</label>
+            <input type="password" name="cpassword" id="" required>
+        </div>
+        <div style="display:flex;flex-direction:row;gap:0.8rem; margin-top:2rem; justify-content:space-between;">
+            <p>Já está cadastrado? <a href="./login">Faça login</a></p>
+            <button class="btn btn-bg" type="submit">Cadastrar</button>
+        </div>
+    </form>
+    <div style="display: flex;flex-direction: row; width: 10rem;margin-top: 2rem;margin-left: 1rem; justify-content:flex-end">
+        <a href="./"><i class="fas fa-arrow-circle-left"></i></a>
+        <a style="margin-left:0.4rem;" href="./">Voltar ao Início</a>
+    </div>
+</div>
