@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Connection;
+use App\Utils\Errors\CheckEmailException;
 use App\Utils\Errors\IncorrectLoginException;
 use PDO;
 
@@ -20,9 +21,9 @@ class Autentication
         try{
             if(!$id = self::searchID($conn, $email)) throw new IncorrectLoginException();
 
-            if(!$info = self::validatePerson($conn, $id, $password)) throw new IncorrectLoginException();
+            if(!$person = self::validatePerson($conn, $id, $password)) throw new IncorrectLoginException();
 
-            return $info;
+            return $person;
         }
         catch(IncorrectLoginException $e){
             return $e;
@@ -48,21 +49,18 @@ class Autentication
                 inner join orientador as pr
                 on p.id_pessoa = pr.id_pessoa
             WHERE p.id_pessoa = {$id} AND pr.senha = MD5('{$senha}');";
-        $id_orientador = 0;
-        $ccp = 0;
-        $name = "";
+
         $result = $conn->query($query);
+        $orientador = null;
 
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
                 {
-                    $id_orientador = $row['id_orientador'];
-                    $ccp = $row['_cpp'];
-                    $name = $row['nome'];
+                    if($row['_cpp'] == 1) $orientador = new Orientador($row['id_orientador'], $row['nome'], "CCP");
+                    else $orientador = new Orientador($row['id_orientador'], $row['nome'], "Orientador");
                 }
 
-        
-        return array($id_orientador, $ccp, $name);
+        return $orientador;
     }
 
     private static function validateOrientando($conn, $id, $senha){
@@ -71,30 +69,26 @@ class Autentication
                 inner join orientando as a
                 on p.id_pessoa = a.id_pessoa
             WHERE p.id_pessoa = {$id} AND a.senha = MD5('{$senha}');";
-        $id_orientando= 0;
-        $name = "";
+        
         $result = $conn->query($query);
+        $orientando = null;
 
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
                 {
-                    $id_orientando = $row['id_orientando'];
-                    $name = $row['nome'];
+                    $orientando = new Orientando($row['id_orientando'], $row['nome'], "Orientando");
+                    
                 }
 
-        return array($id_orientando, $name);
+        return $orientando;
     }
 
     private static function validatePerson($conn, $id_person, $senha){
         $person = self::validateOrientador($conn, $id_person, $senha);
-        if($person[0]) 
-        {
-            if($person[1]) return array("userId"=>$person[0], "userType"=>"CCP", "nome" => $person[2]);
-            else return array("userId"=>$person[0], "userType"=>"Orientador", "nome" => $person[2]);
-        }
+        if($person != null) {return $person;}
 
         $person = self::validateOrientando($conn, $id_person, $senha);
-        return ($person[0]) ? array("userId"=>$person[0], "userType"=>"Orientando", "nome" => $person[1]) :  null;
+        return ($person != null) ? $person :  null;
     }
     
        

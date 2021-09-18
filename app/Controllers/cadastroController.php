@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Views;
 use App\Models\User;
-use App\Utils\Errors\System;
+use App\Utils\System;
 
 class cadastroController extends Controller{
 

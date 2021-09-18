@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Utils\POSTData;
+use Exception;
 
 class User
 {
@@ -14,18 +15,19 @@ class User
         $data = POSTData::postLoginInfo();
         $auth = Autentication::login($data["email"], $data["password"]);
 
-        if(is_array($auth))
+
+        if($auth instanceof Orientador || $auth instanceof Orientando)
         {
             print_r("<pre>");
             print_r("LOGADO: \n");
-            print_r($auth['userId']."\n");
-            print_r($auth['userType']."\n");
-            print_r($auth['nome']);
+            print_r($auth->getId()."\n");
+            print_r($auth->getType()."\n");
+            print_r($auth->getName());
             print_r("</pre>");
             session_start();
-            $_SESSION['userId'] = $auth['userId'];
-            $_SESSION['userType'] = $auth['userType'];
-            $_SESSION['nome'] = $auth['nome'];
+            //$_SESSION['userId'] = $auth['userId'];
+            //$_SESSION['userType'] = $auth['userType'];
+            //$_SESSION['nome'] = $auth['nome'];
         }
         else{
             session_start();

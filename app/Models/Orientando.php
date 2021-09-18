@@ -9,16 +9,16 @@ use App\Utils\Errors\CheckEmailException;
 use App\Utils\Errors\PersonAlreadyUsedException;
 
 
-class Orientador
+class Orientando
 {
     private $id;
     private $name;
     private $type;
 
-    public function __construct($id, $name, $ccpConfirm){
+    public function __construct($id, $name, $type){
         $this->id = $id;
         $this->name = $name;
-        $this->ccpConfirm = $ccpConfirm;
+        $this->type = $type;
     }
 
 

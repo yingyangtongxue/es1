@@ -14,10 +14,10 @@ class Orientador
     private $name;
     private $type;
 
-    public function __construct($id, $name, $ccpConfirm){
+    public function __construct($id, $name, $type){
         $this->id = $id;
         $this->name = $name;
-        $this->ccpConfirm = $ccpConfirm;
+        $this->type = $type;
     }
 
     public static function cadastro($name, $email, $password, $cpassword, $ccpConfirm)
