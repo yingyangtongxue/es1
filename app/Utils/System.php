@@ -8,7 +8,6 @@ class System{
 
     public static function errorExists()
     {
-      session_start();
       $error = "";
 
       if(isset($_SESSION["error"]) && !empty($_SESSION["error"])) 
@@ -16,6 +15,8 @@ class System{
         $error = '<div class="error">'.$_SESSION["error"].'</div>';
         unset($_SESSION["error"]);
       } 
+
+      
 
       return $error;
     }

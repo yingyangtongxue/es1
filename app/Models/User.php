@@ -10,29 +10,34 @@ class User
 
     public function __construct(){}
 
+    public static function isLoggedIn(){
+        if( isset($_SESSION['userId']) && isset($_SESSION['userType']))
+        {
+            if($_SESSION['userType'] == "Orientando") header('Location: '.getenv('URL') .'orientando');
+            elseif($_SESSION['userType'] == "Orientador") header('Location: '.getenv('URL') .'orientador');
+            elseif($_SESSION['userType'] == "CCP") header('Location: '.getenv('URL') .'ccp');
+        }
+    }
+
     public static function login()
     {
         $data = POSTData::postLoginInfo();
         $auth = Autentication::login($data["email"], $data["password"]);
 
-
+        session_start();
         if($auth instanceof Orientador || $auth instanceof Orientando)
         {
-            print_r("<pre>");
-            print_r("LOGADO: \n");
-            print_r($auth->getId()."\n");
-            print_r($auth->getType()."\n");
-            print_r($auth->getName());
-            print_r("</pre>");
-            session_start();
-            //$_SESSION['userId'] = $auth['userId'];
-            //$_SESSION['userType'] = $auth['userType'];
-            //$_SESSION['nome'] = $auth['nome'];
+            $_SESSION['userId'] = $auth->getId();
+            $_SESSION['userType'] = $auth->getType();
+            $_SESSION['nome'] = $auth->getName();
+            
+
+            self::isLoggedIn();
         }
         else{
-            session_start();
             $_SESSION["error"] = $auth->errorMessage();
             header('Location: '.getenv('URL') .'login');
+
         }
     }
 
@@ -50,7 +55,7 @@ class User
             {
                 session_start();
                 $_SESSION["error"] = $status->errorMessage();
-                header('Location: '.getenv('URL') .'cadastro');
+                header('Location: '.getenv('URL') .'cadOrientador');
             }
         }
         else{

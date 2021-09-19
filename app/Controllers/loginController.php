@@ -13,6 +13,9 @@ class loginController extends Controller{
 
     public static function index($params)
     {
+        session_start();
+        User::isLoggedIn();
+
         $page = Views::render("template_usp","login", [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Login'
@@ -35,7 +38,7 @@ class loginController extends Controller{
     }
 
     public static function getMethods(){
-        return get_class_methods(get_class());
+        return ["index","autentication"];
     }
 
 }

@@ -7,15 +7,16 @@ use App\Core\Views;
 use App\Models\User;
 use App\Utils\System;
 
-class cadastroController extends Controller{
+class cadOrientadorController extends Controller{
 
     public function __construct() {}
 
     public static function index($params)
     {
-      $page =  Views::render("template_usp","cadastro", [
+      session_start();
+      $page =  Views::render("template_usp","cadOrientador", [
         'URL' => '<base href="'.getenv('URL').'">',
-        'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro'
+        'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro Orientador'
       ]);
 
       $error = System::errorExists();
@@ -30,13 +31,13 @@ class cadastroController extends Controller{
         User::cadastro('orientador');
       }
       else{
-        header('Location: '.getenv('URL') .'cadastro');
+        header('Location: '.getenv('URL') .'cadOrientador');
       }
     }
 
     public static function getMethods()
     {
-      return get_class_methods(get_class());
+      return ["index","cadastrar"];
     }
 
 }
