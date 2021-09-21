@@ -29,7 +29,7 @@ class User
         {
             $_SESSION['userId'] = $auth->getId();
             $_SESSION['userType'] = $auth->getType();
-            $_SESSION['nome'] = $auth->getName();
+            $_SESSION['userName'] = $auth->getName();
             
 
             self::isLoggedIn();
