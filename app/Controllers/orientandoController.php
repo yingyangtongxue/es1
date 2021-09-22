@@ -25,6 +25,7 @@ class orientandoController extends Controller{
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientando',
             'userType' => 'Orientando',
             'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
             'menu' => Views::getContentView('menus/menu_orientando')
           ]);
 

@@ -25,6 +25,7 @@ class ccpController extends Controller{
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
             'userType' => 'CCP',
             'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
             'menu' => Views::getContentView('menus/menu_ccp')
           ]);
 
