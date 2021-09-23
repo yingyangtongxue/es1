@@ -6,6 +6,8 @@ use App\Core\Controller;
 use App\Core\Views;
 use App\Models\User;
 use App\Utils\System;
+use App\Models\Connection;
+use PDO;
 
 class cadOrientandoController extends Controller{
 
@@ -20,8 +22,10 @@ class cadOrientandoController extends Controller{
         ]);
   
         $error = System::errorExists();
-  
-        echo str_replace('{{error}}', $error, $page);
+
+        $select = self::fillSelect();
+
+        echo str_replace( array('{{error}}','{{options}}'), array($error, $select), $page);
     }
 
     public static function cadastrar()
@@ -31,8 +35,28 @@ class cadOrientandoController extends Controller{
             User::cadastro('orientando');
         }
         else{
-            header('Location: '.getenv('URL') .'cadOrientador');
+            header('Location: '.getenv('URL') .'cadOrientando');
         }
+    }
+
+    private static function fillSelect(){
+
+        $conn = Connection::getConnection();
+
+        $query = "SELECT pr.id_orientador, p.nome 
+                     FROM orientador as pr 
+                     INNER JOIN pessoa as p 
+                     ON pr.id_pessoa = p.id_pessoa;";
+
+        $result = $conn->query($query);
+        
+        $select = "<option value='0' selected disabled>Selecione um Orientador</option>";
+        if($result)
+                while($row = $result->fetch(PDO::FETCH_ASSOC))
+                    $select = $select . "<option value='".$row['id_orientador']."'>".$row['nome']."</option>"."\n";
+                     
+                   
+        return $select;
     }
 
     public static function getMethods()

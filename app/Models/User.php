@@ -49,7 +49,7 @@ class User
             $status = Orientador::cadastro($data["name"], $data["email"], $data["password"], $data["cpassword"], $data["CCPconfirm"]);
 
             if($status === true){
-                header('Location: '.getenv('URL') .'home');
+                header('Location: '.getenv('URL') .'');
             }
             else
             {
@@ -60,6 +60,19 @@ class User
         }
         else{
 
+            $data = POSTData::postCadastroOrientando();
+        
+            $status = Orientando::cadastro($data["name"], $data["email"], $data["password"], $data["cpassword"], $data["id_orientador"]);
+    
+            if($status === true){
+                header('Location: '.getenv('URL') .'');
+            }
+            else
+            {
+                session_start();
+                $_SESSION["error"] = $status->errorMessage();
+                header('Location: '.getenv('URL') .'cadOrientando');
+            }
         }    
     }
  

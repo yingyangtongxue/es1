@@ -22,21 +22,19 @@ class Orientando
     }
 
 
-    public static function cadastro($data)
+    public static function cadastro($name, $email, $password, $cpassword, $id_orientador)
     {
        
         try {
 
-            if (!self::confirmPassword($data["password"], $data["cpassword"])) throw new ConfirmPasswordException();
+            if (!self::confirmPassword($password, $cpassword)) throw new ConfirmPasswordException();
             
     
             $conn = Connection::getConnection();
     
-            if(!$id = self::checkEmail($conn, $data["email"])) throw new CheckEmailException();
-
-            //To-Do: Verificar se Orientador Associado Existe
+            if(!$id = self::checkEmail($conn, $email)) throw new CheckEmailException();
     
-            if(!self::insertOrientando($conn, $data["ra"], $data["name"], $data["password"],  $id, $data["id_orientador"])) throw new PersonAlreadyUsedException();
+            if(!self::insertOrientando($conn, $name, $password,  $id, $id_orientador)) throw new PersonAlreadyUsedException();
 
             return true;
 
@@ -67,10 +65,10 @@ class Orientando
         return $id_pessoa;
     }
 
-    private static function insertOrientando($conn, $ra, $name, $password, $id_pessoa, $id_orientador)
+    private static function insertOrientando($conn, $name, $password, $id_pessoa, $id_orientador)
     {
-        $query = "INSERT INTO orientando (ra, user, senha, id_pessoa, id_orientador) 
-            VALUES ('{$ra}', '{$name}', MD5('{$password}'), {$id_pessoa}, {$id_orientador});";
+        $query = "INSERT INTO orientando (user, senha, id_pessoa, id_orientador) 
+            VALUES ('{$name}', MD5('{$password}'), {$id_pessoa}, {$id_orientador});";
 
 
         try{

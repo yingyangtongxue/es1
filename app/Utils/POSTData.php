@@ -28,4 +28,16 @@ class POSTData{
         return array("name" => $name, "email" => $email, "password" => $password, "cpassword" => $cpassword, "CCPconfirm" => $CCPconfirm);
     }
 
+    public static function postCadastroOrientando()
+    {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
+        $id_orientador =  $_POST['select-orientador']; 
+
+        unset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['cpassword'], $_POST['select-orientador']);
+
+        return array("name" => $name, "email" => $email, "password" => $password, "cpassword" => $cpassword, "id_orientador" => $id_orientador);
+    }
 }

@@ -16,8 +16,6 @@ class System{
         unset($_SESSION["error"]);
       } 
 
-      
-
       return $error;
     }
 
