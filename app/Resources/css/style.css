@@ -234,9 +234,22 @@ ul.list-anchor {
     border: 1px solid var(--bg);
 }
 
+.relatorios-pendentes ul li{
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.relatorios-pendentes ul li i{
+    color: var(--bg);
+}
+
+
 .main-container div ul {
     list-style: none;
 }
+
+
 
 .main-container div ul li p {
     padding: 0.4rem;
