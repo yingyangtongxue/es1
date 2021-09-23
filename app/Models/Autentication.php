@@ -44,7 +44,7 @@ class Autentication
     }
 
     private static function validateOrientador($conn, $id, $senha){
-        $query = "SELECT pr.id_orientador, pr._cpp, p.nome
+        $query = "SELECT pr.id_orientador, pr._cpp, pr.user
             FROM pessoa as p 
                 inner join orientador as pr
                 on p.id_pessoa = pr.id_pessoa
@@ -56,15 +56,15 @@ class Autentication
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
                 {
-                    if($row['_cpp'] == 1) $orientador = new Orientador($row['id_orientador'], $row['nome'], "CCP");
-                    else $orientador = new Orientador($row['id_orientador'], $row['nome'], "Orientador");
+                    if($row['_cpp'] == 1) $orientador = new Orientador($row['id_orientador'], $row['user'], "CCP");
+                    else $orientador = new Orientador($row['id_orientador'], $row['user'], "Orientador");
                 }
 
         return $orientador;
     }
 
     private static function validateOrientando($conn, $id, $senha){
-        $query = "SELECT a.id_orientando, p.nome
+        $query = "SELECT a.id_orientando, a.user
             FROM pessoa as p 
                 inner join orientando as a
                 on p.id_pessoa = a.id_pessoa
@@ -76,7 +76,7 @@ class Autentication
         if($result)
                 while($row = $result->fetch(PDO::FETCH_ASSOC))
                 {
-                    $orientando = new Orientando($row['id_orientando'], $row['nome'], "Orientando");
+                    $orientando = new Orientando($row['id_orientando'], $row['user'], "Orientando");
                     
                 }
 

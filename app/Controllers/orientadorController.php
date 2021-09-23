@@ -27,16 +27,19 @@ class orientadorController extends Controller{
 
         $menu = self::checkSession();
 
-        $page = Views::render("template_administrativo","relatorios_pendentes", [
+        echo Views::render("template_administrativo","relatorios_pendentes", 
+        [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientador',
             'userType' => 'Orientador',
             'userName' => $_SESSION['userName'],
             'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
             'menu' => Views::getContentView($menu)
-          ]);
+        ],
+        [
 
-        echo $page;
+        ]);
+
     }
 
     public static function getMethods()

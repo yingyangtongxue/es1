@@ -14,14 +14,18 @@ class cadOrientadorController extends Controller{
     public static function index($params)
     {
       session_start();
-      $page =  Views::render("template_usp","cadOrientador", [
-        'URL' => '<base href="'.getenv('URL').'">',
-        'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro Orientador'
-      ]);
 
       $error = System::errorExists();
 
-      echo str_replace('{{error}}', $error, $page);
+      echo Views::render("template_usp","cadOrientador", 
+      [
+        'URL' => '<base href="'.getenv('URL').'">',
+        'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro Orientador'
+      ], 
+      [
+        'error' => $error
+      ]);
+
     }
 
     public static function cadastrar()

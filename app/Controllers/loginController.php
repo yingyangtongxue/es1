@@ -16,15 +16,18 @@ class loginController extends Controller{
         session_start();
         User::isLoggedIn();
 
-        $page = Views::render("template_usp","login", [
+        $error = System::errorExists();
+
+        echo Views::render("template_usp","login", 
+        [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Login'
-          ]);
+        ],
+        [
+            'error' => $error
+        ]);
 
-        
-        $error = System::errorExists();
-        
-        echo str_replace('{{error}}', $error, $page);
+    
     }
 
     public static function autentication(){

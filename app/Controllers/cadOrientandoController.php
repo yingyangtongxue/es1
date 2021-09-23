@@ -16,16 +16,21 @@ class cadOrientandoController extends Controller{
     public static function index($params)
     {
         session_start();
-        $page =  Views::render("template_usp","cadOrientando", [
-          'URL' => '<base href="'.getenv('URL').'">',
-          'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro Orientando'
-        ]);
-  
+
         $error = System::errorExists();
 
         $select = self::fillSelect();
 
-        echo str_replace( array('{{error}}','{{options}}'), array($error, $select), $page);
+        echo Views::render("template_usp","cadOrientando", 
+        [
+          'URL' => '<base href="'.getenv('URL').'">',
+          'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Cadastro Orientando'
+        ], 
+        [
+            'error' => $error,
+            'options' =>$select
+        ]);
+     
     }
 
     public static function cadastrar()
