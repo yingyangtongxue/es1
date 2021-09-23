@@ -21,7 +21,7 @@ window.onclick = function (event) {
     }
 }
 
-let btnRelatorio = document.querySelector("#novo-relatorio")
+/*let btnRelatorio = document.querySelector("#novo-relatorio")
 
 btnRelatorio.addEventListener('click', () =>{
     let item = document.createElement('li')
@@ -29,3 +29,4 @@ btnRelatorio.addEventListener('click', () =>{
     buttonModal.classList.add('modalbutton')
     item.appendChild(buttonModal)
 })
+*/

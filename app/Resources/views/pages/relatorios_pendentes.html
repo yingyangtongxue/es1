@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<div class="main-container">
+    <h1>Relatórios Pendentes</h1>
+    <div class="relatorios-pendentes">
+        <ul>
+            <li>
+                <p class="modalbutton">
+                    relatório de fulano
+                </p>
+            </li>
+            <li>
+                <p class="modalbutton">
+                    relatório de fulano
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal">
+
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="file">
+            <a href=""><i class="fas fa-paperclip"></i></a>
+            <p>relatório de fulano</p>
+        </div>
+        <form action="" method="post">
+            <label for="select">Atribuir Nota:</label>
+            <select name="select">
+                <option value="null" selected></option>
+                <option value="1">ADEQUADO</option>
+                <option value="2">ADEQUADO COM RESSALVAS</option>
+                <option value="3">INSATISFATÓRIO</option>
+            </select>
+            <textarea name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
+            <button class="btn btn-bg" type="submit">Confirmar</button>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="app/Resources/js/script.js"></script>
