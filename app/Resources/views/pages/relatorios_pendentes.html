@@ -4,17 +4,32 @@
     <h1>Relatórios Pendentes</h1>
     <div class="relatorios-pendentes">
         <ul>
-            <li>
-                <p class="modalbutton unread">
-                    relatório de fulano
-                </p>
+            <li class="modalbutton unread">
                 <i class="fas fa-envelope"></i>
-            </li>
-            <li>
-                <p class="modalbutton">
-                    relatório de fulano
+                <p>
+                    Relatório PPgSI - Fulano M.    
                 </p>
+                <p class="date">
+                    20/09/2021
+                </p>
+            </li>
+            <li class="modalbutton unread">
+                <i class="fas fa-envelope"></i>
+                <p>
+                    Relatório PPgSI - Fulano T.    
+                </p>
+                <p class="date">
+                    20/09/2021
+                </p>
+            </li>
+            <li class="modalbutton read">
                 <i class="fas fa-envelope-open"></i>
+                <p>
+                    Relatório PPgSI -  Fulano S.
+                </p>
+                <p class="date">
+                    21/09/2021
+                </p>
             </li>
         </ul>
     </div>
@@ -25,6 +40,8 @@
 
     <div class="modal-content">
         <span class="close">&times;</span>
+        <h1>Avaliar Relatório</h1>
+        <br>
         <div class="file">
             <a href=""><i class="fas fa-paperclip"></i></a>
             <p>relatório de fulano</p>
@@ -35,6 +52,7 @@
                 cuscuz é ruim
             </p>
         </div>
+        <br>
         <form class="modal-form" action="" method="post">
             <div>
                 <label for="select">Atribuir Nota:</label>
@@ -46,7 +64,10 @@
                 </select>
             </div>
             <textarea name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
-            <button class="btn btn-bg" type="submit">Confirmar</button>
+            <div class="modal-buttons">
+                <button class="btn btn-bg" type="submit">Salvar</button>
+                <button class="btn btn-bg" type="submit">Confirmar</button>
+            </div>
         </form>
     </div>
 
