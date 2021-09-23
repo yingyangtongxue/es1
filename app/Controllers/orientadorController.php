@@ -4,10 +4,16 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Views;
+use App\Models\Reports;
 
 class orientadorController extends Controller{
 
     public function __construct() {}
+
+    private static function listReports($id_orientador){
+        $reports = Reports::getReportsOrientador($id_orientador);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
 
     private static function checkSession(){
         if($_SESSION['userType'] == "Orientador")
@@ -26,6 +32,8 @@ class orientadorController extends Controller{
         session_start();
 
         $menu = self::checkSession();
+        $reports = self::listReports($_SESSION['userId']);
+       
 
         echo Views::render("template_administrativo","relatorios_pendentes", 
         [
@@ -37,7 +45,7 @@ class orientadorController extends Controller{
             'menu' => Views::getContentView($menu)
         ],
         [
-
+            'reports' => $reports
         ]);
 
     }
