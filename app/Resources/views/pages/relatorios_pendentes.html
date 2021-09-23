@@ -5,7 +5,7 @@
     <div class="relatorios-pendentes">
         <ul>
             <li>
-                <p class="modalbutton">
+                <p class="modalbutton unread">
                     relatório de fulano
                 </p>
             </li>
@@ -27,14 +27,22 @@
             <a href=""><i class="fas fa-paperclip"></i></a>
             <p>relatório de fulano</p>
         </div>
-        <form action="" method="post">
-            <label for="select">Atribuir Nota:</label>
-            <select name="select">
-                <option value="null" selected></option>
-                <option value="1">ADEQUADO</option>
-                <option value="2">ADEQUADO COM RESSALVAS</option>
-                <option value="3">INSATISFATÓRIO</option>
-            </select>
+        <div class="comentario-aluno">
+            <h3>Comentário do Aluno: </h3>
+            <p>
+                cuscuz é ruim
+            </p>
+        </div>
+        <form class="modal-form" action="" method="post">
+            <div>
+                <label for="select">Atribuir Nota:</label>
+                <select name="select">
+                    <option value="null" selected></option>
+                    <option value="1">ADEQUADO</option>
+                    <option value="2">ADEQUADO COM RESSALVAS</option>
+                    <option value="3">INSATISFATÓRIO</option>
+                </select>
+            </div>
             <textarea name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
             <button class="btn btn-bg" type="submit">Confirmar</button>
         </form>

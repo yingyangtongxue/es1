@@ -17,6 +17,11 @@ a {
     color: var(--bg);
 }
 
+.unread{
+    font-weight: 700 !important;
+    color: var(--bg);
+}
+
 
 .error{
     margin: 0 auto;
@@ -145,6 +150,14 @@ ul.list-anchor {
     justify-content: space-between;
 }
 
+.header .image-container{
+    display: flex;
+    color: var(--secondary-bg);
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
 .header .image-container img {
     height: 4rem;
     margin: 0.5rem 1rem;
@@ -159,12 +172,17 @@ ul.list-anchor {
 }
 
 .list-anchor li {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding-top: 0.6rem;
 }
 
 .list-anchor li a {
     text-decoration: none;
+    transition: 0.1s ease-in;
+}
+
+.list-anchor li a:hover {
+   opacity: 0.7;
 }
 
 .list-anchor li+li {
@@ -222,9 +240,14 @@ ul.list-anchor {
 
 .main-container div ul li p {
     padding: 0.4rem;
-    font-weight: 500;
-    font-size: 0.7rem;
+    font-weight: 400;
+    font-size: 0.9rem;
     cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+
+.main-container div ul li p:hover {
+    opacity: 0.7;
 }
 
 .main-container div ul li+li {
@@ -252,6 +275,31 @@ ul.list-anchor {
     padding: 20px;
     border: 2px solid var(--bg);
     width: 50%;
+}
+
+.modal-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-form button{
+    width: 30%;
+    text-align: center;
+    padding: 0.5rem 0.5rem;
+    justify-self: flex-end;
+    align-self: flex-end;
+
+}
+
+.comentario-aluno{
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap:0.4rem;
+}
+
+.comentario-aluno h3{
+    color: var(--bg);
 }
 
 .close {
@@ -282,7 +330,7 @@ ul.list-anchor {
 
 .modal-content form textarea {
     border: 1px solid var(--bg);
-    margin: 1rem auto;
+    margin: 1rem 0rem;
     padding: 0.4rem;
     font-size: 1rem;
     border: 1px solid var(--bg);
@@ -316,3 +364,4 @@ ul.list-anchor {
     position: absolute;
     z-index: -1;
 }
+
