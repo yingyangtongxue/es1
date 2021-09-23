@@ -185,6 +185,9 @@ ul.list-anchor {
     font-weight: 700;
 }
 
+.logout-button{
+    z-index: 2 !important;
+}
 .main-container {
     margin-top: -22rem;
     width: 100%;
