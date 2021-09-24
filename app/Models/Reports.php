@@ -5,6 +5,7 @@ namespace App\Models;
 use mysqli;
 use PDOStatement;
 use PDO;
+use PhpParser\Node\Expr\FuncCall;
 
 class Reports
 {
@@ -16,7 +17,7 @@ class Reports
     {
         $conn = Connection::getConnection();
 
-        //get nos Relatórios Ainda Não Lidos
+        //get nos Relatórios Ainda não Abertos e nos Abertos
         $query = "SELECT p.nome, e.dataEnvio, r.id_relatorio, av.dataInicio
         FROM avaliacao as av
             inner join relatorio as r
@@ -75,7 +76,7 @@ class Reports
     {
         $conn = Connection::getConnection();
 
-        //get nos Relatórios Ainda Não Lidos
+        //get nos Relatórios CCP Ainda não Abertos e nos Abertos
         $query = "  SELECT pa.nome as 'nome_aluno', ppr.nome as 'nome_prof', e.dataEnvio, e.descricao as 'desc_aluno', r.caminho, 
                    av.descricao as 'desc_prof', av.dataInicio as 'dataInicio_prof', av.dataAval, avop.descricao as 'aval_prof',
                    cpp.dataInicio as 'dataInicio_cpp', r.id_relatorio
@@ -135,5 +136,15 @@ class Reports
             $report =  $report . "</ul> </div> </div>";
         }
         return $report;
+    }
+
+    public static function saveReport($id_aval, $nota, $comment_prof){
+        $conn = Connection::getConnection();
+
+        
+        $query = "UPDATE avaliacao
+        SET id_avalOpcao = $nota, descricao = '{$comment_prof}' WHERE id_aval = {$id_aval};";
+        
+        $conn->query($query);
     }
 }

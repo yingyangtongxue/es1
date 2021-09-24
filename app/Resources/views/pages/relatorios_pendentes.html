@@ -22,7 +22,7 @@
             </p>
         </div>
         <br>
-        <form id="modal-form" class="modal-form" action="" method="post">
+        <form id="modal-form" class="modal-form" action="./orientador/updateReport" method="post">
             <input type="text" name="id_aval"  id="id_aval" style="display: none;">
             <div>
                 <label for="select">Parecer:</label>
@@ -35,8 +35,8 @@
             </div>
             <textarea id="comentario" name="comentario" placeholder="Comentário..." rows="10" cols="50"  ></textarea>
             <div class="modal-buttons">
-                <button class="btn btn-bg" type="submit">Salvar Avaliação</button>
-                <button class="btn btn-bg" type="submit">Enviar Avaliação</button>
+                <button class="btn btn-bg" name="save_button" type="submit">Salvar Avaliação</button>
+                <button class="btn btn-bg" name="send_button" type="submit">Enviar Avaliação</button>
             </div>
         </form>
     </div>

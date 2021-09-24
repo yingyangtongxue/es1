@@ -40,4 +40,16 @@ class POSTData{
 
         return array("name" => $name, "email" => $email, "password" => $password, "cpassword" => $cpassword, "id_orientador" => $id_orientador);
     }
+
+
+    public static function postSave()
+    {
+        $id_aval = $_POST['id_aval'];
+        $select = $_POST['select'];
+        $comentario = $_POST['comentario'];
+
+        unset($_POST['id_aval'], $_POST['select'], $_POST['comentario']);
+
+        return array("id_aval" => $id_aval, "select" => $select, "comentario" => $comentario);
+    }
 }
