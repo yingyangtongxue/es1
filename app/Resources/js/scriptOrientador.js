@@ -18,16 +18,19 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
 
 
 function fillModal(id){
-    let values = $.ajax({
+             $.ajax({
                 url:"app/Ajax/modalOrientador.php",    //the page containing php script
                 type: "post",    //request type,
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
+                    console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.nota);
                     console.log(result.comment_aluno);
                     console.log(result.comment_prof);
+
+                    $('#id_aval').val(result.id_aval);
 
                     $('.file > a').attr("href", result.caminho)
                     $('.file > a > p').text(result.caminho)
@@ -47,7 +50,6 @@ function fillModal(id){
                     $('#comentario').text(result.comment_prof)
                 }
             });
-    console.log(values);
 }
 
 function clickModal(event) {
@@ -56,7 +58,7 @@ function clickModal(event) {
     if(p == undefined) p = ((event.target).parentElement).children[2];
 
     console.log(p);
-    fillModal(p.innerHTML);
+    fillModal(p.innerText);
 }
 
 btn.forEach(button => {

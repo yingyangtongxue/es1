@@ -386,6 +386,7 @@ ul.list-anchor {
     padding: 0.4rem;
     font-size: 1rem;
     border: 1px solid var(--bg);
+    resize: none;
 }
 
 .modal-content form textarea::selection {

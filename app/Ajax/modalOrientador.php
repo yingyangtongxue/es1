@@ -11,13 +11,12 @@ if (isset($_POST['id_rel'])){
 
     $id_rel = $_POST['id_rel'];
 
-
     $conn = Connection::getConnection();
 
-    $query = "SELECT r.caminho, avop.descricao as 'nota', e.descricao as 'comment_aluno', av.descricao as 'comment_prof'
+    $query = "SELECT av.id_aval, r.caminho, avop.descricao as 'nota', e.descricao as 'comment_aluno', av.descricao as 'comment_prof'
     FROM avaliacao as av
         inner join avalOpcao as avop
-        on av.id_avalopcao = avop.id_avalopcao
+        on av.id_avalOpcao = avop.id_avalOpcao
         inner join relatorio as r
         on av.id_relatorio = r.id_relatorio
             inner join periodo as pe
@@ -28,12 +27,10 @@ if (isset($_POST['id_rel'])){
 
     $result = $conn->query($query);
 
-   
-
     if($result)
     {
             $row = $result->fetch(PDO::FETCH_ASSOC);
-            echo json_encode(array("caminho"=> $row['caminho'], "nota" => $row['nota'], "comment_aluno" => $row['comment_aluno'], "comment_prof" => $row['comment_prof']));
+            echo json_encode(array("id_aval"=> $row['id_aval'] ,"caminho"=> $row['caminho'], "nota" => $row['nota'], "comment_aluno" => $row['comment_aluno'], "comment_prof" => $row['comment_prof']));
     }       
     
     exit;

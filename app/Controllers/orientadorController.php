@@ -50,9 +50,19 @@ class orientadorController extends Controller{
 
     }
 
+    public static function updateReport(){
+        if ($_POST['action'] == 'Salvar') {
+            //action for update here
+        } else if ($_POST['action'] == 'Enviar') {
+            //action for delete
+        } else {
+            //invalid action!
+        }
+    }
+
     public static function getMethods()
     {
-        return ["index"];
+        return ["index", "updateReport"];
     }
 
 }
