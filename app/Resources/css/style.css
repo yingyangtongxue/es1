@@ -374,6 +374,12 @@ ul.list-anchor {
     cursor: pointer;
 }
 
+.file > a {
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+}
+
 .modal-content form textarea {
     border: 1px solid var(--bg);
     margin: 1rem 0rem;

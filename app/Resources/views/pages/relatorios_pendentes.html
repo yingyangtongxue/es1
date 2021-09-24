@@ -10,34 +10,37 @@
         <h1>Avaliar Relatório</h1>
         <br>
         <div class="file">
-            <a href=""><i class="fas fa-paperclip"></i></a>
-            <p>relatório de fulano</p>
+            <a href="">
+                <i class="fas fa-paperclip"></i>
+                <p></p>
+            </a>
         </div>
         <div class="comentario-aluno">
             <h3>Comentário do Aluno: </h3>
             <p>
-                cuscuz é ruim
+                
             </p>
         </div>
         <br>
-        <form class="modal-form" action="" method="post">
+        <form id="modal-form" class="modal-form" action="" method="post">
             <div>
-                <label for="select">Atribuir Nota:</label>
-                <select name="select">
-                    <option value="null" selected></option>
+                <label for="select">Parecer:</label>
+                <select id="select_nota" name="select">
+                    <option value="0" selected disabled>SELECIONE UM PARECER:</option>
                     <option value="1">ADEQUADO</option>
                     <option value="2">ADEQUADO COM RESSALVAS</option>
                     <option value="3">INSATISFATÓRIO</option>
                 </select>
             </div>
-            <textarea name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
+            <textarea id="comentario" name="comentario" placeholder="Comentário..." rows="10" cols="50"></textarea>
             <div class="modal-buttons">
-                <button class="btn btn-bg" type="submit">Salvar</button>
-                <button class="btn btn-bg" type="submit">Confirmar</button>
+                <button class="btn btn-bg" type="submit">Salvar Elaboração</button>
+                <button class="btn btn-bg" type="submit">Enviar Avaliação</button>
             </div>
         </form>
     </div>
 
 </div>
 
-<script type="text/javascript" src="app/Resources/js/script.js"></script>
+<script type="text/javascript" src="app/Resources/js/scriptOrientador.js"></script>
+

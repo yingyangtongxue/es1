@@ -17,7 +17,7 @@ class Reports
         $conn = Connection::getConnection();
 
         //get nos Relatórios Ainda Não Lidos
-        $query = "SELECT p.nome, e.dataEnvio, e.descricao, r.caminho, av.dataInicio
+        $query = "SELECT p.nome, e.dataEnvio, r.id_relatorio, av.dataInicio
         FROM avaliacao as av
             inner join relatorio as r
             on av.id_relatorio = r.id_relatorio
@@ -46,10 +46,11 @@ class Reports
                     $report = $report . "<li class='modalbutton unread'>
                                             <i class='fas fa-envelope'></i>
                                                 <p>
-                                                     Relatório PPgSI - " . $row['nome'] . "    
+                                                     Relatório PPgSI - ".$row['nome']."
                                                 </p>
+                                                <p id='id_rel' style='display:none'>".$row['id_relatorio']."</p>
                                                 <p class='date'>
-                                                        " . $row['dataEnvio'] . "
+                                                        ".date_format(date_create($row['dataEnvio']),'d/m/Y')."
                                                 </p>
                                         </li>" . "\n";
                 else {
@@ -58,8 +59,9 @@ class Reports
                                                 <p>
                                                     Relatório PPgSI - " . $row['nome'] . "    
                                                 </p>
+                                                <p id='id_rel' style='display:none'>".$row['id_relatorio']."</p>
                                                 <p class='date'>
-                                                     " . $row['dataEnvio'] . "
+                                                     " .date_format(date_create($row['dataEnvio']),'d/m/Y'). "
                                                 </p>
                                          </li>" . "\n";
                 }
