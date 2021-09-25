@@ -20,7 +20,7 @@ class orientandoController extends Controller{
 
         self::checkSession();
         
-        $page = Views::render("template_administrativo","", [
+        $page = Views::render("template_administrativo","enviar_relatorio", [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientando',
             'userType' => 'Orientando',
@@ -32,9 +32,31 @@ class orientandoController extends Controller{
         echo $page;
     }
 
+
+    public static function history($params)
+    {
+        session_start();
+
+        self::checkSession();
+        
+        $page = Views::render("template_administrativo","historico_relatorios", [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientando',
+            'userType' => 'Orientando',
+            'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
+            'menu' => Views::getContentView('menus/menu_orientando')
+          ]);
+
+        echo $page;
+
+    }
+
+
+
     public static function getMethods()
     {
-        return ["index"];
+        return ["index", "history"];
     }
 
 }
