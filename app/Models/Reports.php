@@ -41,7 +41,7 @@ class Reports
 
         if ($result->rowCount()) {
             $report =  "<div class='main-container'>
-                            <h1>Relatórios Pendentes</h1> 
+                            <h1>Relatórios Pendentes - Orientador</h1> 
                             <div class='relatorios-pendentes'> 
                                 <ul>";
             while ($row = $result->fetch(PDO::FETCH_ASSOC))
@@ -110,7 +110,7 @@ class Reports
 
         if ($result->rowCount()) {
             $report =  "<div class='main-container'>
-                            <h1>Relatórios Pendentes</h1> 
+                            <h1>Relatórios Pendentes - CCP</h1> 
                             <div class='relatorios-pendentes'> 
                                 <ul>";
             while ($row = $result->fetch(PDO::FETCH_ASSOC))
@@ -166,7 +166,7 @@ class Reports
 
         if ($result->rowCount()) {
             $report =  "<div class='main-container'>
-                            <h1>Histórico de Relatórios</h1> 
+                            <h1>Histórico de Relatórios - Orientador</h1> 
                             <div class='historico-relatorios'> 
                                 <ul>";
             while ($row = $result->fetch(PDO::FETCH_ASSOC))

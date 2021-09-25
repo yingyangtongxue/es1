@@ -12,16 +12,19 @@ class ccpController extends Controller{
 
     public function __construct() {}
 
-    private static function listReports($id_ccp){
-        $reports = Reports::getReportsCCP($id_ccp);
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
-    }
-
+    //Checa Sessão
     private static function checkSession(){
         if($_SESSION['userType'] == "CCP"){ return;}
         else header('Location: '.getenv('URL') .'erro404');
     }
 
+    //Listar Relatórios
+    private static function listReports($id_ccp){
+        $reports = Reports::getReportsCCP($id_ccp);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
+
+    //Relatórios Pendentes
     public static function index($params)
     {
         session_start();
@@ -44,6 +47,24 @@ class ccpController extends Controller{
         echo $page;
     }
 
+    public static function updateReport(){
+        session_start();
+        if (isset($_POST['save_button'])) {
+            $data = POSTData::postSave();
+            Reports::saveReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
+            header('Location: '.getenv('URL') .'ccp');
+        } else if (isset($_POST['send_button'])) {
+            $data = POSTData::postSave();
+            Reports::sendReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
+            header('Location: '.getenv('URL') .'ccp');
+        } else {
+            header('Location: '.getenv('URL') .'');
+        }
+    }
+
+
+
+    //Histórico 
     public static function history($params)
     {
         session_start();
@@ -64,21 +85,6 @@ class ccpController extends Controller{
             
         ]);
 
-    }
-
-    public static function updateReport(){
-        session_start();
-        if (isset($_POST['save_button'])) {
-            $data = POSTData::postSave();
-            Reports::saveReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
-            header('Location: '.getenv('URL') .'ccp');
-        } else if (isset($_POST['send_button'])) {
-            $data = POSTData::postSave();
-            Reports::sendReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
-            header('Location: '.getenv('URL') .'ccp');
-        } else {
-            header('Location: '.getenv('URL') .'');
-        }
     }
 
     public static function getMethods()

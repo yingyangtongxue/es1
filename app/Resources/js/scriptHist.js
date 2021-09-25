@@ -3,34 +3,21 @@ let modal = document.getElementById("myModal");
 let btnDisplayModal = document.querySelectorAll(".modalbutton");
 
 let span = document.getElementsByClassName("close")[0];
-/*
-document.getElementById('modal-form').addEventListener("submit", function(event) {
-      
-    let select = document.getElementById('select_nota');
-    let value = select.options[select.selectedIndex].value;
-    if(value == 0) 
-    {
-        alert("Selecione um Parecer Válido");
-        event.preventDefault();
-    }
-    
-});*/
 
-/*
 function fillModal(id){
              $.ajax({
-                url:"app/Ajax/modalOrientador.php",    //the page containing php script
+                url:"app/Ajax/modalHist.php",    //the page containing php script
                 type: "post",    //request type,
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
-                    console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
-                    console.log(result.nota);
+                    console.log(result.nota_prof);
                     console.log(result.comment_prof);
+                    console.log(result.nota_cpp);
+                    console.log(result.comment_cpp);
 
-                    $('#id_aval').val(result.id_aval);
 
                     $('.file > a').attr("href", result.caminho)
                     $('.file > a > p').text(result.caminho)
@@ -41,23 +28,27 @@ function fillModal(id){
                         $('.comentario-aluno').show();
                         $('.comentario-aluno > p').text(result.comment_aluno)
                     }
-
-                    if(result.nota == "ADEQUADO") $('#select_nota').val('1');
-                    else if (result.nota == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');
-                    else if (result.nota == "INSATISFATÓRIO") $('#select_nota').val('3');
-                    else $('#select_nota').val('0');
                     
-                    $('#comentario').text(result.comment_prof)
+                    if(result.nota_prof == null) $('.nota > p').text("NÃO AVALIADO");
+                    else $('.nota > p').text(result.nota_prof);
+                    if(result.comment_prof == null) $('.comment-prof > div > p').text("NÃO AVALIADO");
+                    else $('.comment-prof > div > p').text(result.comment_prof);
+
+                    if(result.nota_cpp == null) $('.nota-ccp > p').text("NÃO AVALIADO");
+                    else $('.nota-ccp > p').text(result.nota_cpp);
+                    if(result.comment_cpp == null) $('.comment-ccp > div > p').text("NÃO AVALIADO")
+                    else $('.comment-ccp > div > p').text(result.comment_cpp)
                 }
             });
-}*/
+}
 
 function clickDisplayModal(event) {
     modal.style.display = "block";
     let p = ((event.target).children[2]);
     if(p == undefined) p = ((event.target).parentElement).children[2];
 
-    /*fillModal(p.innerText);*/
+    console.log(p.innerText);
+    fillModal(p.innerText);
 }
 
 btnDisplayModal.forEach(button => {

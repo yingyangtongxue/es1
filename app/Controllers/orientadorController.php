@@ -11,11 +11,7 @@ class orientadorController extends Controller{
 
     public function __construct() {}
 
-    private static function listReports($id_orientador){
-        $reports = Reports::getReportsOrientador($id_orientador);
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
-    }
-
+    //Checa sessão
     private static function checkSession(){
         if($_SESSION['userType'] == "Orientador")
         {
@@ -28,6 +24,13 @@ class orientadorController extends Controller{
         else header('Location: '.getenv('URL') .'erro404');
     }
 
+    //Lista Relatórios
+    private static function listReports($id_orientador){
+        $reports = Reports::getReportsOrientador($id_orientador);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
+
+    //Relatórios Pendentes
     public static function index($params)
     {
         session_start();
@@ -37,33 +40,6 @@ class orientadorController extends Controller{
        
 
         echo Views::render("template_administrativo","relatorios_pendentes", 
-        [
-            'URL' => '<base href="'.getenv('URL').'">',
-            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientador',
-            'userType' => 'Orientador',
-            'userName' => $_SESSION['userName'],
-            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
-            'menu' => Views::getContentView($menu)
-        ],
-        [
-            'reports' => $reports
-        ]);
-
-    }
-
-    private static function listHistory($id_orientador){
-        $reports = Reports::getHistoryOrientador($id_orientador);
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
-    }
-
-    public static function history($params)
-    {
-        session_start();
-
-        $menu = self::checkSession();
-        $reports = self::listHistory($_SESSION['userId']);
-
-        echo Views::render("template_administrativo","historico_relatorios", 
         [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientador',
@@ -90,6 +66,36 @@ class orientadorController extends Controller{
         } else {
             header('Location: '.getenv('URL') .'');
         }
+    }
+
+    //Lista Histórico
+    private static function listHistory($id_orientador){
+        $reports = Reports::getHistoryOrientador($id_orientador);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
+
+    
+    //Histórico
+    public static function history($params)
+    {
+        session_start();
+
+        $menu = self::checkSession();
+        $reports = self::listHistory($_SESSION['userId']);
+
+        echo Views::render("template_administrativo","historico_relatorios", 
+        [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientador',
+            'userType' => 'Orientador',
+            'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
+            'menu' => Views::getContentView($menu)
+        ],
+        [
+            'reports' => $reports
+        ]);
+
     }
 
     public static function getMethods()
