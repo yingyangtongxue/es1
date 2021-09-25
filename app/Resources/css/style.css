@@ -258,7 +258,7 @@ ul.list-anchor {
     border: 1px solid var(--bg);
 }
 
-.relatorios-pendentes ul li{
+.relatorios-pendentes ul li, .historico-relatorios ul li{
     height: 40px;
     display: flex;
     gap: 0.3rem;
@@ -272,7 +272,7 @@ ul.list-anchor {
     opacity: 0.7;
 }
 
-.relatorios-pendentes ul li i{
+.relatorios-pendentes ul li i, .historico-relatorios ul li i{
     margin-left: 1rem;
     color: var(--bg);
 }
@@ -316,6 +316,13 @@ ul.list-anchor {
     width: 50%;
 }
 
+.modal-content > h1{
+    color:var(--bg);
+    margin: 0.5rem 0rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
 .modal-ccp{
     margin:2% auto;
 }
@@ -340,22 +347,22 @@ ul.list-anchor {
 
 }
 
-.comentario-aluno, .comentario-orientador{
+.comentario-aluno, .comentario-orientador, .comentario-ccp{
     margin-top: 1rem;
     display: flex;
     gap:0.4rem;
 }
 
-.comentario-orientador .comentario-container{
+.comentario-orientador .comentario-container, .comentario-ccp .comentario-container{
     width: 60%;
     max-height: 6rem;
     overflow-y: auto;
 }
 
-.comentario-aluno h3, .comentario-orientador h3{
+.comentario-aluno h3, .comentario-orientador h3, .comentario-ccp h3{
     color: var(--bg);
 }
-.comentario-orientador + .comentario-orientador{
+.comentario-orientador + .comentario-orientador, .comentario-ccp + .comentario-ccp{
     margin-bottom: 2rem;
 }
 
@@ -382,6 +389,7 @@ ul.list-anchor {
     width: 80%;
     padding: 0.6rem 0.3rem;
     gap: 8px;
+    margin: 0.4rem auto;
     cursor: pointer;
 }
 

@@ -172,6 +172,7 @@ class Reports
             while ($row = $result->fetch(PDO::FETCH_ASSOC))
             {
                     $report = $report . "<li class='modalbutton'>
+                                                <i class='fas fa-file'></i>
                                                 <p>
                                                     Relatório PPgSI - " . $row['nome'] . "    
                                                 </p>
