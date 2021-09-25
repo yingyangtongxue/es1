@@ -158,6 +158,14 @@ a {
 
 ul.list-anchor {
     list-style: none;
+    position: sticky;
+    top: 5rem;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 99;
 }
 
 .header {
@@ -191,6 +199,7 @@ ul.list-anchor {
 }
 
 .list-anchor li {
+    z-index: 0;
     height: 2.5rem;
     font-size: 0.9rem;
 }
@@ -431,13 +440,17 @@ ul.list-anchor {
 }
 
 .relatorio-container{
-    width:70%;
+    width:100%;
     margin: 2rem auto;
+    display: flex;
+    justify-content: center;
 }
 
 .relatorio-container form{
-    width: 100%;
+    margin-left: 10rem;
     display: flex;
+    flex-wrap: wrap;
+    gap:5rem;
 }
 
 .relatorio-container .file-container input[type=file]{
@@ -458,7 +471,7 @@ ul.list-anchor {
     transition: 0.4s ease-in-out;
     cursor: pointer;
     padding: 0.7rem;
-    width: 50%;
+    width: 20rem;
     border-radius: 0.5rem;
     color: var(--bg);
     font-weight: 700;
