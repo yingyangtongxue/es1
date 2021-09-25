@@ -180,7 +180,7 @@ ul.list-anchor {
 
 .sidebar {
     text-align: center;
-    height: 90vh;
+    min-height: 90vh;
     width: 15%;
     border-right: 2px solid var(--bg);
     border-top: 1px solid white;
@@ -296,14 +296,13 @@ ul.list-anchor {
 
 .modal {
     display: none;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    min-height: 110vh;
     overflow: hidden;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -344,8 +343,13 @@ ul.list-anchor {
 .comentario-aluno, .comentario-orientador{
     margin-top: 1rem;
     display: flex;
-    align-items: center;
     gap:0.4rem;
+}
+
+.comentario-orientador .comentario-container{
+    width: 60%;
+    max-height: 6rem;
+    overflow-y: auto;
 }
 
 .comentario-aluno h3, .comentario-orientador h3{
