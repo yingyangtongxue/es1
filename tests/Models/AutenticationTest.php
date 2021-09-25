@@ -1,6 +1,7 @@
 <?php
 use \PHPUnit\Framework\TestCase;
 use App\Models\Autentication;
+use App\Models\Orientador;
 use App\Models\Connection;
 use App\Utils\Errors\IncorrectLoginException;
 
@@ -8,6 +9,8 @@ class AutenticationTest extends TestCase
 {
     public function __construct()
     {
+        parent::__construct();
+
         $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . "\..\..");
         $dotenv->load();
 
@@ -38,22 +41,22 @@ class AutenticationTest extends TestCase
 
     public function testLoginEmailInvalido()
     {
-        $this->expectException(IncorrectLoginException::class);
+        $result = (new Autentication())->login("email_invalido@example.com", "senha_qualquer");
 
-        (new Autentication())->login("email_invalido@example.com", "senha_qualquer");
+        $this->assertEquals(IncorrectLoginException::class, $result::class);
     }
     
     public function testLoginSenhaInvalida()
     {
-        $this->expectException(IncorrectLoginException::class);
+        $result = (new Autentication())->login("email_valido@example.com", "senha_invalida");
 
-        (new Autentication())->login("email_valido@example.com", "senha_invalida");
+        $this->assertEquals(IncorrectLoginException::class, $result::class);
     }
 
     public function testLoginParametrosValidos()
     {
         $result = (new Autentication())->login("email_valido@example.com", "senha_valida");
 
-        $this->assertTrue(is_subclass_of($result, "Orientando") || is_subclass_of($result, "Orientador"));
+        $this->assertEquals(Orientador::class, $result::class);
     }
 }
