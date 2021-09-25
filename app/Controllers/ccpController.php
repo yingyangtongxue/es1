@@ -63,16 +63,22 @@ class ccpController extends Controller{
     }
 
 
+    //Lista Histórico
+    private static function listHistory(){
+        $reports = Reports::getHistoryCCP();
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
 
+    
     //Histórico 
     public static function history($params)
     {
         session_start();
 
         $menu = self::checkSession();
-       
+        $reports = self::listHistory();
 
-        echo Views::render("template_administrativo","historico_relatoriosCCP", 
+        echo Views::render("template_administrativo","historico_relatorios", 
         [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
@@ -82,7 +88,7 @@ class ccpController extends Controller{
             'menu' => Views::getContentView('menus/menu_ccp')
         ],
         [
-            
+            'reports' => $reports
         ]);
 
     }
