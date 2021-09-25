@@ -3,7 +3,7 @@ let modal = document.getElementById("myModal");
 let btnDisplayModal = document.querySelectorAll(".modalbutton");
 
 let span = document.getElementsByClassName("close")[0];
-
+/*
 document.getElementById('modal-form').addEventListener("submit", function(event) {
       
     let select = document.getElementById('select_nota');
@@ -14,12 +14,12 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
         event.preventDefault();
     }
     
-});
+});*/
 
-
+/*
 function fillModal(id){
              $.ajax({
-                url:"app/Ajax/modalCCP.php",    //the page containing php script
+                url:"app/Ajax/modalOrientador.php",    //the page containing php script
                 type: "post",    //request type,
                 dataType: 'json',
                 data: {id_rel: id},
@@ -27,10 +27,8 @@ function fillModal(id){
                     console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
-                    console.log(result.nota_prof);
+                    console.log(result.nota);
                     console.log(result.comment_prof);
-                    console.log(result.nota_cpp);
-                    console.log(result.comment_cpp);
 
                     $('#id_aval').val(result.id_aval);
 
@@ -44,29 +42,26 @@ function fillModal(id){
                         $('.comentario-aluno > p').text(result.comment_aluno)
                     }
 
-                    $('.nota > p').text(result.nota_prof);
-                    $('.comment-prof > div > p').text(result.comment_prof);
-
-                    if(result.nota_cpp == "ADEQUADO") $('#select_nota').val('1');
-                    else if (result.nota_cpp == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');
-                    else if (result.nota_cpp == "INSATISFATÓRIO") $('#select_nota').val('3');
+                    if(result.nota == "ADEQUADO") $('#select_nota').val('1');
+                    else if (result.nota == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');
+                    else if (result.nota == "INSATISFATÓRIO") $('#select_nota').val('3');
                     else $('#select_nota').val('0');
                     
-                    $('#comentario').text(result.comment_cpp)
+                    $('#comentario').text(result.comment_prof)
                 }
             });
-}
+}*/
 
 function clickDisplayModal(event) {
     modal.style.display = "block";
     let p = ((event.target).children[2]);
     if(p == undefined) p = ((event.target).parentElement).children[2];
 
-    fillModal(p.innerText);
+    /*fillModal(p.innerText);*/
 }
 
 btnDisplayModal.forEach(button => {
-    button.addEventListener('click', clickDisplayModal)
+    button.addEventListener('click',clickDisplayModal)
 })
 span.onclick = function () {
     modal.style.display = "none";

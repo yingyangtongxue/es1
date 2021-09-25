@@ -1,9 +1,9 @@
 let modal = document.getElementById("myModal");
-
+console.log(modal)
 let btnDisplayModal = document.querySelectorAll(".modalbutton");
-
+console.log(btnDisplayModal)
 let span = document.getElementsByClassName("close")[0];
-
+/*
 document.getElementById('modal-form').addEventListener("submit", function(event) {
       
     let select = document.getElementById('select_nota');
@@ -15,8 +15,8 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
     }
     
 });
-
-
+*/
+/*
 function fillModal(id){
              $.ajax({
                 url:"app/Ajax/modalCCP.php",    //the page containing php script
@@ -55,14 +55,14 @@ function fillModal(id){
                     $('#comentario').text(result.comment_cpp)
                 }
             });
-}
+}*/
 
 function clickDisplayModal(event) {
     modal.style.display = "block";
     let p = ((event.target).children[2]);
     if(p == undefined) p = ((event.target).parentElement).children[2];
 
-    fillModal(p.innerText);
+   /* fillModal(p.innerText);*/
 }
 
 btnDisplayModal.forEach(button => {
