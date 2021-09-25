@@ -43,7 +43,7 @@ function fillModal(id){
                     }
 
                     if(result.nota == "ADEQUADO") $('#select_nota').val('1');
-                    if (result.nota == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');
+                    else if (result.nota == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');
                     else if (result.nota == "INSATISFATÓRIO") $('#select_nota').val('3');
                     else $('#select_nota').val('0');
                     

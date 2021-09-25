@@ -6,7 +6,6 @@ use App\Core\Controller;
 use App\Core\Views;
 use App\Models\Reports;
 use App\Utils\POSTData;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class orientadorController extends Controller{
 
@@ -56,11 +55,9 @@ class orientadorController extends Controller{
         if (isset($_POST['save_button'])) {
             $data = POSTData::postSave();
             Reports::saveReport($data['id_aval'],$data['select'], $data['comentario'] );
-            exit;
             header('Location: '.getenv('URL') .'orientador');
         } else if (isset($_POST['send_button'])) {
             echo "BOTAO DE ENVIAR";
-
         } else {
             header('Location: '.getenv('URL') .'');
         }

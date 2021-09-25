@@ -5,13 +5,15 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Views;
 use App\Models\Reports;
+use App\Utils\POSTData;
+
 
 class ccpController extends Controller{
 
     public function __construct() {}
 
-    private static function listReports(){
-        $reports = Reports::getReportsCCP();
+    private static function listReports($id_ccp){
+        $reports = Reports::getReportsCCP($id_ccp);
         return ($reports != "") ?  $reports : Views::getContentView("no_reports");
     }
 
@@ -25,7 +27,7 @@ class ccpController extends Controller{
         session_start();
 
         self::checkSession();
-        $reports = self::listReports();
+        $reports = self::listReports($_SESSION['userId']);
 
         $page = Views::render("template_administrativo","relatorios_pendentesCCP", [
             'URL' => '<base href="'.getenv('URL').'">',
@@ -43,12 +45,14 @@ class ccpController extends Controller{
     }
 
     public static function updateReport(){
-        if ($_POST['action'] == 'Salvar') {
-            //action for update here
-        } else if ($_POST['action'] == 'Enviar') {
-            //action for delete
+        if (isset($_POST['save_button'])) {
+            $data = POSTData::postSave();
+            Reports::saveReport($data['id_aval'],$data['select'], $data['comentario'] );
+            header('Location: '.getenv('URL') .'ccp');
+        } else if (isset($_POST['send_button'])) {
+            echo "BOTAO DE ENVIAR";
         } else {
-            //invalid action!
+            header('Location: '.getenv('URL') .'');
         }
     }
 

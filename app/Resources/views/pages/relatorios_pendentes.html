@@ -27,13 +27,13 @@
             <div>
                 <label for="select">Parecer:</label>
                 <select id="select_nota" name="select">
-                    <option value="0" selected disabled>SELECIONE UM PARECER:</option>
+                    <option value="0" selected disabled required>SELECIONE UM PARECER:</option>
                     <option value="1">ADEQUADO</option>
                     <option value="2">ADEQUADO COM RESSALVAS</option>
                     <option value="3">INSATISFATÓRIO</option>
                 </select>
             </div>
-            <textarea id="comentario" name="comentario" placeholder="Comentário..." rows="10" cols="50"  ></textarea>
+            <textarea id="comentario" name="comentario" placeholder="Comentário..." rows="10" cols="50"  required></textarea>
             <div class="modal-buttons">
                 <button class="btn btn-bg" name="save_button" type="submit">Salvar Avaliação</button>
                 <button class="btn btn-bg" name="send_button" type="submit">Enviar Avaliação</button>

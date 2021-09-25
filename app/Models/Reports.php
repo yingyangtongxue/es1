@@ -72,33 +72,33 @@ class Reports
         return $report;
     }
 
-    public static function getReportsCCP()
+    public static function getReportsCCP($id_ccp)
     {
         $conn = Connection::getConnection();
 
         //get nos Relatórios CCP Ainda não Abertos e nos Abertos
-        $query = "  SELECT pa.nome as 'nome_aluno', ppr.nome as 'nome_prof', e.dataEnvio, e.descricao as 'desc_aluno', r.caminho, 
-                   av.descricao as 'desc_prof', av.dataInicio as 'dataInicio_prof', av.dataAval, avop.descricao as 'aval_prof',
-                   cpp.dataInicio as 'dataInicio_cpp', r.id_relatorio
-               FROM avaliacao as av
-                   inner join avalOpcao as avop
-                   on av.id_avalOpcao = avop.id_avalOpcao
-                   inner join relatorio as r
-                   on av.id_relatorio = r.id_relatorio
-                       inner join elaboracao as e
-                       on r.id_relatorio = e.id_relatorio
-                           inner join orientando as a
-                           on e.id_orientando = a.id_orientando
-                               inner join pessoa as pa
-                               on a.id_pessoa = pa.id_pessoa
-                   inner join orientador as pr
-                   on av.id_orientador = pr.id_orientador
-                       inner join pessoa as ppr
-                       on pr.id_pessoa = ppr.id_pessoa
-                   inner join avaliacao as cpp
-                   on av.id_aval = cpp.id_aval_pai
-               WHERE av.id_avalOpcao != 4
-               ORDER BY cpp.dataInicio;";
+        $query = " SELECT pa.nome as 'nome_aluno', ppr.nome as 'nome_prof', e.dataEnvio, e.descricao as 'desc_aluno', r.caminho, 
+                  av.descricao as 'desc_prof', av.dataInicio as 'dataInicio_prof', av.dataAval, avop.descricao as 'aval_prof',
+                  cpp.dataInicio as 'dataInicio_cpp', r.id_relatorio
+              FROM avaliacao as av
+                  inner join avalOpcao as avop
+                  on av.id_avalOpcao = avop.id_avalOpcao
+                  inner join relatorio as r
+                  on av.id_relatorio = r.id_relatorio
+                      inner join elaboracao as e
+                      on r.id_relatorio = e.id_relatorio
+                          inner join orientando as a
+                          on e.id_orientando = a.id_orientando
+                              inner join pessoa as pa
+                              on a.id_pessoa = pa.id_pessoa
+                  inner join orientador as pr
+                  on av.id_orientador = pr.id_orientador
+                      inner join pessoa as ppr
+                      on pr.id_pessoa = ppr.id_pessoa
+                  inner join avaliacao as cpp
+                  on av.id_aval = cpp.id_aval_pai
+              WHERE av.id_avalOpcao != 4 AND ((cpp.dataInicio IS NULL) OR cpp.id_orientador = {$id_ccp})
+              ORDER BY cpp.dataInicio;";
 
         $report = "";
         $result = $conn->query($query);
@@ -141,9 +141,7 @@ class Reports
     public static function saveReport($id_aval, $nota, $comment_prof){
         $conn = Connection::getConnection();
 
-        
-        $query = "UPDATE avaliacao
-        SET id_avalOpcao = $nota, descricao = '{$comment_prof}' WHERE id_aval = {$id_aval};";
+        $query = "CALL salvarAvaliacao({$id_aval}, {$nota}, '{$comment_prof}');";
         
         $conn->query($query);
     }
