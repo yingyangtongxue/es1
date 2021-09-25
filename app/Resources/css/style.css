@@ -7,6 +7,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 :root {
     --bg: #1094AB;
     --secondary-bg: #fff;
@@ -427,13 +431,40 @@ ul.list-anchor {
 }
 
 .relatorio-container{
+    width:70%;
+    margin: 2rem auto;
+}
+
+.relatorio-container form{
+    width: 100%;
     display: flex;
-    flex-direction: row;
 }
 
 .relatorio-container .file-container input[type=file]{
     opacity: 0;
     position: absolute;
     z-index: -1;
+}
+
+.relatorio-container .file-container{
+    width: 100%;
+}
+
+#file-name{
+    display: flex;
+}
+
+.label-file{
+    transition: 0.4s ease-in-out;
+    cursor: pointer;
+    padding: 0.7rem;
+    width: 50%;
+    border-radius: 0.5rem;
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: var(--secondary-bg);
+    border: 2px solid var(--bg);
 }
 
