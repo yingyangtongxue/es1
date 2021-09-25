@@ -44,13 +44,38 @@ class ccpController extends Controller{
         echo $page;
     }
 
+    public static function history($params)
+    {
+        session_start();
+
+        $menu = self::checkSession();
+       
+
+        echo Views::render("template_administrativo","historico_relatoriosCCP", 
+        [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
+            'userType' => 'CCP',
+            'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
+            'menu' => Views::getContentView('menus/menu_ccp')
+        ],
+        [
+            
+        ]);
+
+    }
+
     public static function updateReport(){
+        session_start();
         if (isset($_POST['save_button'])) {
             $data = POSTData::postSave();
-            Reports::saveReport($data['id_aval'],$data['select'], $data['comentario'] );
+            Reports::saveReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
             header('Location: '.getenv('URL') .'ccp');
         } else if (isset($_POST['send_button'])) {
-            echo "BOTAO DE ENVIAR";
+            $data = POSTData::postSave();
+            Reports::sendReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);
+            header('Location: '.getenv('URL') .'ccp');
         } else {
             header('Location: '.getenv('URL') .'');
         }
@@ -58,7 +83,7 @@ class ccpController extends Controller{
 
     public static function getMethods()
     {
-        return ["index", "updateReport"];
+        return ["index", "updateReport","history"];
     }
 
 }
