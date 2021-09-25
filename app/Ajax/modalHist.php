@@ -36,7 +36,7 @@ if (isset($_POST['id_rel'])){
     if($result)
     {
             $row = $result->fetch(PDO::FETCH_ASSOC);
-            echo json_encode(array("caminho"=> $row['caminho'],"comment_aluno" => $row['comment_aluno'],"nota_prof" => $row['nota_prof'], "comment_prof" => $row['comment_prof'], "nota_cpp" => $row['nota_cpp'], "comment_cpp" => $row['comment_cpp'] ));
+            echo json_encode(array("caminho"=> $row['caminho'],"dataInicio"=> $row['dataInicio'],"dataTermino"=> $row['dataTermino'] ,"comment_aluno" => $row['comment_aluno'],"nota_prof" => $row['nota_prof'], "comment_prof" => $row['comment_prof'], "nota_cpp" => $row['nota_cpp'], "comment_cpp" => $row['comment_cpp'] ));
     }       
 
     

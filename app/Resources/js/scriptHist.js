@@ -12,6 +12,8 @@ function fillModal(id){
                 data: {id_rel: id},
                 success:function(result){
                     console.log(result.caminho);
+                    console.log(result.dataInicio);
+                    console.log(result.dataTermino);
                     console.log(result.comment_aluno);
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
@@ -19,15 +21,20 @@ function fillModal(id){
                     console.log(result.comment_cpp);
 
 
-                    $('.file > a').attr("href", result.caminho)
-                    $('.file > a > p').text(result.caminho)
+                    $('.file > a').attr("href", result.caminho);
+                    $('.file > a > p').text(result.caminho);
+
+                    let inicio = new Date(result.dataInicio);
+                    let termino = new Date(result.dataTermino);
+                    $('.periodo > p').text(inicio.toLocaleDateString("pt-BR")+" - "+termino.toLocaleDateString("pt-BR"));
 
                     if(result.comment_aluno == null) $('.comentario-aluno').hide();
                     else 
                     {
                         $('.comentario-aluno').show();
-                        $('.comentario-aluno > p').text(result.comment_aluno)
+                        $('.comentario-aluno > p').text(result.comment_aluno);
                     }
+                    
                     
                     if(result.nota_prof == null) $('.nota > p').text("NÃO AVALIADO");
                     else $('.nota > p').text(result.nota_prof);

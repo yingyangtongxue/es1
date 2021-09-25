@@ -49,6 +49,9 @@ class ccpController extends Controller{
 
     public static function updateReport(){
         session_start();
+
+        self::checkSession();
+
         if (isset($_POST['save_button'])) {
             $data = POSTData::postSave();
             Reports::saveReportCCP($data['id_aval'],$data['select'], $data['comentario'], $_SESSION['userId']);

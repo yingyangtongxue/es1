@@ -32,6 +32,13 @@ class orientandoController extends Controller{
         echo $page;
     }
 
+    public static function sendReport($params)
+    {
+        session_start();
+
+        self::checkSession();
+    }
+
 
     public static function history($params)
     {
@@ -56,7 +63,7 @@ class orientandoController extends Controller{
 
     public static function getMethods()
     {
-        return ["index", "history"];
+        return ["index", "history", "sendReport"];
     }
 
 }

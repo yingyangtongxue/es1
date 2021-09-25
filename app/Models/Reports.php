@@ -223,7 +223,7 @@ class Reports
                                                 </p>
                                                 <p id='id_rel' style='display:none'>" . $row['id_relatorio'] . "</p>
                                                 <p class='date'>
-                                                     " . date_format(date_create($row['dataInicio']), 'd/m/Y') . "
+                                                     " . date_format(date_create($row['dataEnvio']), 'd/m/Y') . "
                                                 </p>
                                          </li>" . "\n";
             }
