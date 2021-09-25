@@ -9,6 +9,7 @@
 
 body{
     overflow-x: hidden;
+    overflow-y:auto ;
 }
 
 :root {
@@ -96,7 +97,7 @@ a {
 }
 
 .btn {
-    transition: 0.4s ease-in-out;
+    transition: 0.2s ease-in-out;
     cursor: pointer;
     padding: 0.7rem 6.7rem;
     border-radius: 0.5rem;
@@ -157,9 +158,9 @@ a {
 }
 
 ul.list-anchor {
-    list-style: none;
     position: sticky;
     top: 5rem;
+    list-style: none;
 }
 
 header{
@@ -190,12 +191,12 @@ header{
     filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
 }
 
+
 .sidebar {
-    text-align: center;
     min-height: 90vh;
+    text-align: center;
     width: 15%;
     border-right: 2px solid var(--bg);
-    border-top: 1px solid white;
 }
 
 .list-anchor li {
@@ -203,6 +204,7 @@ header{
     height: 2.5rem;
     font-size: 0.9rem;
 }
+
 
 .list-anchor li a {
     width: 100%;
@@ -309,14 +311,13 @@ header{
 
 .modal {
     display: none;
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
-    min-height: 110vh;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.4);
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 /* Modal Content/Box */
@@ -337,7 +338,7 @@ header{
 }
 
 .modal-ccp{
-    margin:2% auto;
+    margin:1% auto;
 }
 
 .modal-form{
@@ -360,7 +361,7 @@ header{
 
 }
 
-.comentario-aluno, .comentario-orientador, .comentario-ccp{
+.comentario-aluno, .comentario-orientador, .comentario-ccp,.orientador-label{
     margin-top: 1rem;
     display: flex;
     gap:0.4rem;
@@ -372,7 +373,7 @@ header{
     overflow-y: auto;
 }
 
-.comentario-aluno h3, .comentario-orientador h3, .comentario-ccp h3{
+.comentario-aluno h3, .comentario-orientador h3, .comentario-ccp h3, .orientador-label h3{
     color: var(--bg);
 }
 .comentario-orientador + .comentario-orientador, .comentario-ccp + .comentario-ccp{
@@ -413,7 +414,6 @@ header{
 }
 
 .modal-content form textarea {
-    border: 1px solid var(--bg);
     margin: 1rem 0rem;
     padding: 0.4rem;
     font-size: 1rem;
@@ -447,10 +447,23 @@ header{
 }
 
 .relatorio-container form{
-    margin-left: 10rem;
     display: flex;
     flex-wrap: wrap;
-    gap:5rem;
+    flex-direction: column;
+    gap:3rem 5rem;
+}
+
+.relatorio-container form .comentario-enviar{
+    display: flex;
+}
+
+.relatorio-container form .comentario-enviar textarea{
+    resize: none;
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 1px solid var(--bg);
+    resize: none;
 }
 
 .relatorio-container .file-container input[type=file]{
@@ -461,6 +474,8 @@ header{
 
 .relatorio-container .file-container{
     width: 100%;
+    display: flex;
+    gap:5rem;
 }
 
 #file-name{
@@ -468,7 +483,7 @@ header{
 }
 
 .label-file{
-    transition: 0.4s ease-in-out;
+    transition: 0.2s ease-in-out;
     cursor: pointer;
     padding: 0.7rem;
     width: 20rem;
@@ -481,3 +496,12 @@ header{
     border: 2px solid var(--bg);
 }
 
+.label-file:hover{
+    background-color: var(--bg) ;
+    color:var(--secondary-bg);
+}
+
+.buttons-enviar{
+    display: flex;
+    justify-content: flex-end;
+}
