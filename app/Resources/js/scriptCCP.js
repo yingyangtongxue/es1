@@ -16,7 +16,7 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
     
 });
 
-
+/*
 function fillModal(id){
              $.ajax({
                 url:"app/Ajax/modalOrientador.php",    //the page containing php script
@@ -51,7 +51,7 @@ function fillModal(id){
                 }
             });
 }
-
+*/
 function clickDisplayModal(event) {
     modal.style.display = "block";
     let p = ((event.target).children[2]);
@@ -62,7 +62,7 @@ function clickDisplayModal(event) {
 }
 
 btnDisplayModal.forEach(button => {
-    button.addEventListener('click',clickDisplayModal)
+    button.addEventListener('click', clickDisplayModal)
 })
 span.onclick = function () {
     modal.style.display = "none";

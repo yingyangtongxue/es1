@@ -231,12 +231,12 @@ ul.list-anchor {
     z-index: 2 !important;
 }
 .main-container {
-    margin-top: -22rem;
+    margin: 2rem auto;
     width: 100%;
     display: flex;
-    min-height: 70vh;
     flex-direction: column;
     justify-content: center;
+    align-self: flex-start;
 }
 
 .main-container h1{
@@ -310,11 +310,15 @@ ul.list-anchor {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 2px solid var(--bg);
     border-radius: 10px;
     width: 50%;
+}
+
+.modal-ccp{
+    margin:2% auto;
 }
 
 .modal-form{
@@ -337,15 +341,18 @@ ul.list-anchor {
 
 }
 
-.comentario-aluno{
-    margin-top: 0.5rem;
+.comentario-aluno, .comentario-orientador{
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     gap:0.4rem;
 }
 
-.comentario-aluno h3{
+.comentario-aluno h3, .comentario-orientador h3{
     color: var(--bg);
+}
+.comentario-orientador + .comentario-orientador{
+    margin-bottom: 2rem;
 }
 
 .close {
