@@ -75,7 +75,7 @@ class ccpController extends Controller{
     {
         session_start();
 
-        $menu = self::checkSession();
+        self::checkSession();
         $reports = self::listHistory();
 
         echo Views::render("template_administrativo","historico_relatorios", 
