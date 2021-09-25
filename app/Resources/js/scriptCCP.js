@@ -45,7 +45,7 @@ function fillModal(id){
                     }
 
                     $('.nota > p').text(result.nota_prof);
-                    $('.comment-prof > p').text(result.comment_prof);
+                    $('.comment-prof > div > p').text(result.comment_prof);
 
                     if(result.nota_cpp == "ADEQUADO") $('#select_nota').val('1');
                     else if (result.nota_cpp == "ADEQUADO COM RESSALVAS") $('#select_nota').val('2');

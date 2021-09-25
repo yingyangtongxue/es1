@@ -51,12 +51,17 @@ class orientadorController extends Controller{
 
     }
 
+    private static function listHistory($id_orientador){
+        $reports = Reports::getHistoryOrientador($id_orientador);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
+
     public static function history($params)
     {
         session_start();
 
         $menu = self::checkSession();
-       
+        $reports = self::listHistory($_SESSION['userId']);
 
         echo Views::render("template_administrativo","historico_relatorios", 
         [
@@ -68,7 +73,7 @@ class orientadorController extends Controller{
             'menu' => Views::getContentView($menu)
         ],
         [
-            
+            'reports' => $reports
         ]);
 
     }

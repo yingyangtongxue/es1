@@ -26,8 +26,8 @@ function fillModal(id){
                 success:function(result){
                     console.log(result.id_aval);
                     console.log(result.caminho);
-                    console.log(result.nota);
                     console.log(result.comment_aluno);
+                    console.log(result.nota);
                     console.log(result.comment_prof);
 
                     $('#id_aval').val(result.id_aval);
