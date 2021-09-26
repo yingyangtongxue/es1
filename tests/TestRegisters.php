@@ -17,6 +17,11 @@ class TestRegisters
             $conn->query("INSERT INTO orientador (_cpp, user, senha, id_pessoa) VALUES (1,'Usuario 1', MD5('senha_valida'), {$id_pessoa})");
             $id_orientador = $conn->lastInsertId();
 
+            $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('567890123','56789012345', '1999-12-12', 'Usuario 5', 'email_valido@orientador2.com')");
+            $id_pessoa = $conn->lastInsertId();
+            $conn->query("INSERT INTO orientador (_cpp, user, senha, id_pessoa) VALUES (1,'Usuario 5', MD5('senha_valida'), {$id_pessoa})");
+            $id_orientador = $conn->lastInsertId();
+
             $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('234567890','23456789012', '1999-12-12', 'Usuario 2', 'email_valido@orientando.com')");
             $id_pessoa = $conn->lastInsertId();
             $conn->query("INSERT INTO orientando (user, senha, id_pessoa, id_orientador) VALUES ('Usuario 2', MD5('senha_valida'), {$id_pessoa}, {$id_orientador})");
@@ -51,5 +56,6 @@ class TestRegisters
         $this->deletePersonWhereRg("234567890");
         $this->deletePersonWhereRg("345678901");
         $this->deletePersonWhereRg("456789012");
+        $this->deletePersonWhereRg("567890123");
     }
 }
