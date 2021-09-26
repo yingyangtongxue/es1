@@ -274,6 +274,7 @@ class Reports
 
             if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
 
+                date_default_timezone_set('America/Sao_Paulo');
                 // get details of the uploaded file
                 $fileName = $_FILES['pdf']['name'];
                 $fileNameCmps = explode(".", $_FILES['pdf']['name']);

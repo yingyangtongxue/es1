@@ -47,6 +47,7 @@ class ccpController extends Controller{
         echo $page;
     }
 
+    //Salvar ou Enviar Parecer
     public static function updateReport(){
         session_start();
 
@@ -103,9 +104,12 @@ class ccpController extends Controller{
         session_start();
 
         self::checkSession();
-        $reports = self::listReports($_SESSION['userId']);
 
-        $page = Views::render("template_administrativo","gerenciar_periodo", [
+        $period = Reports::getPeriod();
+        if($period == "FORA DO PERÍODO DE ENVIO") $period = 'abrir_periodo';
+        else $period = 'fechar_periodo';
+        
+        $page = Views::render("template_administrativo",$period, [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
             'userType' => 'CCP',
@@ -114,11 +118,17 @@ class ccpController extends Controller{
             'menu' => Views::getContentView('menus/menu_ccp')
             ],
             [
-            'reports' => $reports
+            
             ]);
 
         echo $page;
     }
+
+    private static function closePeriod(){
+        
+    }
+
+
 
     public static function getMethods()
     {

@@ -54,6 +54,7 @@ class orientadorController extends Controller{
 
     }
 
+    //Salvar ou Enviar Parecer
     public static function updateReport(){
         
         session_start();
