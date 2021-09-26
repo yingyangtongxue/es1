@@ -15,6 +15,11 @@ class UserTest extends TestCase
         (new TestRegisters())->insertTests();
     }
 
+    public function __destruct()
+    {
+        (new TestRegisters())->deleteTests();
+    }
+
     private function sendLogin(string $email, string $pwd)
     {
         $_POST['email'] = $email;
