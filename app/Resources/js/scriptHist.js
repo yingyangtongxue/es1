@@ -23,6 +23,7 @@ function fillModal(id){
                     console.log(result.caminho);
                     console.log(result.dataInicio);
                     console.log(result.dataTermino);
+                    console.log(result.nome_prof);
                     console.log(result.comment_aluno);
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
@@ -38,6 +39,8 @@ function fillModal(id){
                     let inicio = new Date(result.dataInicio);
                     let termino = new Date(result.dataTermino);
                     $('.periodo > p').text(inicio.toLocaleDateString("pt-BR")+" - "+termino.toLocaleDateString("pt-BR"));
+
+                    $('.nome_prof > p').text(result.nome_prof);
 
                     if(result.comment_aluno == null) $('.comentario-aluno').hide();
                     else 
