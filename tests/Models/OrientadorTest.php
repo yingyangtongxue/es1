@@ -19,27 +19,26 @@ class OrientadorTest extends TestCase{
     }
     
     public function testOrientadorSenhasDiferentes() { 
-        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_valido@example.com", "senha_valida", "senha_qualquer", "tanto_faz");
+        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_valido@example.com", "senha_valida", "senha_qualquer", 1);
 
         $this->assertEquals(ConfirmPasswordException::class, $result::class);
     }
 
     public function testOrientadorEmailInvalido() {
-        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_invalido@example.com", "senha_qualquer", "senha_qualquer", "tanto_faz");
+        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_invalido@example.com", "senha_qualquer", "senha_qualquer", 1);
     
         $this->assertEquals(CheckEmailException::class, $result::class);
     }
-    /*
-//problemas nas duas
-    public function testOrientadorParametrosValidos() {
-        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_valido@example.com", "senha_valida", "senha_valida", "tanto_faz");
     
-        $this->assertEquals(cadastro::class, $result::class);        
+    public function testOrientadorParametrosValidos() {
+        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_valido@novo_orientador.com", "senha_valida", "senha_valida", 1);
+    
+        $this->assertTrue($result);
     }
 
     public function testOrientadorJaExiste() {
-        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_ja_cadastrado@example.com", "senha_qualquer", "senha_qualquer", "tanto_faz");
-    
+        $result = (new Orientador("id","name","type"))->cadastro("nome", "email_valido@orientador.com", "senha_qualquer", "senha_qualquer", 1);
+
         $this->assertEquals(PersonAlreadyUsedException::class, $result::class);
-    }*/
+    }
 }

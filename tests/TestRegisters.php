@@ -20,6 +20,10 @@ class TestRegisters
             $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('234567890','23456789012', '1999-12-12', 'Usuario 2', 'email_valido@orientando.com')");
             $id_pessoa = $conn->lastInsertId();
             $conn->query("INSERT INTO orientando (user, senha, id_pessoa, id_orientador) VALUES ('Usuario 2', MD5('senha_valida'), {$id_pessoa}, {$id_orientador})");
+
+            $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('345678901','34567890123', '1999-12-12', 'Usuario 3', 'email_valido@novo_orientador.com')");
+
+            $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('456789012','45678901234', '1999-12-12', 'Usuario 4', 'email_valido@novo_orientando.com')");
         }
         catch(PDOException $e) {}
     }
@@ -45,5 +49,7 @@ class TestRegisters
     {
         $this->deletePersonWhereRg("123456789");
         $this->deletePersonWhereRg("234567890");
+        $this->deletePersonWhereRg("345678901");
+        $this->deletePersonWhereRg("456789012");
     }
 }
