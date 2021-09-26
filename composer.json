@@ -5,6 +5,9 @@
             "App\\":"app/"
         }
     },
+    "autoload-dev": {
+        "classmap":["tests/TestRegisters.php"]
+    },
     "require": {
         "vlucas/phpdotenv": "^5.3"
     },
