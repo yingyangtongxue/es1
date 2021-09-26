@@ -267,4 +267,41 @@ class Reports
         
         $conn->query($query);
     }
+
+    public static function SendReportOrientando($id_orientando)
+    {
+        $conn = Connection::getConnection();
+
+        $query = "SELECT iniciarElaboracao({$id_orientando});";
+        
+        $result = $conn->query($query);
+
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        
+        $msg = (array_values($row))[0];
+        
+        if($msg == "Relatório já criado/enviado neste semestre!") echo 'teste';
+        
+        /*if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
+
+            // get details of the uploaded file
+            $fileName = $_FILES['pdf']['name'];
+            $newFileName = $fileName;
+
+            $uploadFileDir = 'docs/reports/';
+            $dest_path = $uploadFileDir . $newFileName;
+
+            if (move_uploaded_file($_FILES['pdf']['tmp_name'], $dest_path)) {
+                $message = 'Upload com sucesso.';
+            } else {
+                $message = 'O Upload falhou';
+                echo($message);
+            }
+        } else {
+            $message = 'Ocorreu um problema durante o upload do arquivo. Procure como resolver o Erro gerado.<br>';
+            $message .= 'Error: ' . $_FILES['pdf']['error'];
+            echo($message);
+            header( "refresh:5;url=./" );
+        }*/
+    }
 }

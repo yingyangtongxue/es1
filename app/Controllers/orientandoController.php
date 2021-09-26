@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Views;
+use App\Models\Reports;
 
 class orientandoController extends Controller{
 
@@ -37,6 +38,13 @@ class orientandoController extends Controller{
         session_start();
 
         self::checkSession();
+
+        if(isset($_POST['send_button'])){
+            Reports::SendReportOrientando($_SESSION['userId']);
+        }
+        else{
+            header('Location: '.getenv('URL') .'orientando');
+        }
     }
 
 
