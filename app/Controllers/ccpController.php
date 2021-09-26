@@ -96,9 +96,33 @@ class ccpController extends Controller{
 
     }
 
+
+    //Gerenciar Período 
+    public static function period($params)
+    {
+        session_start();
+
+        self::checkSession();
+        $reports = self::listReports($_SESSION['userId']);
+
+        $page = Views::render("template_administrativo","gerenciar_periodo", [
+            'URL' => '<base href="'.getenv('URL').'">',
+            'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
+            'userType' => 'CCP',
+            'userName' => $_SESSION['userName'],
+            'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
+            'menu' => Views::getContentView('menus/menu_ccp')
+            ],
+            [
+            'reports' => $reports
+            ]);
+
+        echo $page;
+    }
+
     public static function getMethods()
     {
-        return ["index", "updateReport","history"];
+        return ["index", "updateReport","history","period"];
     }
 
 }

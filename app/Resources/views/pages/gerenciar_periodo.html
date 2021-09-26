@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<div class='main-container'>
+    <h1>Gerenciar Período</h1>
+    <!--Form para abrir periodo-->
+    <form class="date-form" action="">
+        <div>
+            <div class="date-container">
+                <label id="date-now" for="data-atual">Data de Início: </label>
+                <input id='DateNow' class="Date" type='date' name="data-atual" readonly />
+            </div>
+            <div class="date-container">
+                <label id="final-date" for="data-final">Data de Término: </label>
+                <input id="DateFinal" class='Date' type='date' name="data-final" />
+            </div>
+        </div>
+
+        <div class="button-periodo">
+            <button class="btn btn-bg" name="send_button" type="submit">Abrir Novo Período</button>
+        </div>
+    </form>
+
+    <div class="periodo-container">
+        <div>
+            <div class="date-container">
+                <h3>Data de Início: </h3>
+                <p class="date-p">
+                    25/09/2021
+                </p>
+            </div>
+            <div class="date-container">
+                <h3>Data de Término: </h3>
+                <p class="date-p">
+                    26/09/2021
+                </p>
+            </div>
+        </div>
+
+        <div class="button-periodo">
+            <button class="btn btn-bg" name="send_button" type="submit">Fechar Período</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="app/Resources/js/scriptPeriodo.js"></script>
