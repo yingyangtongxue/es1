@@ -16,6 +16,14 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
     
 });
 
+function fileNameString(path){
+    let fileNameString = path.innerText.split(/(\\|\/)/g).pop()
+
+    if(fileNameString.length > 40){
+        fileNameString = fileNameString.substring(0,40)+'...'
+    }
+    path.innerText = fileNameString;
+}
 
 function fillModal(id){
              $.ajax({
@@ -36,6 +44,8 @@ function fillModal(id){
 
                     $('.file > a').attr("href", result.caminho)
                     $('.file > a > p').text(result.caminho)
+                    let caminhoParagraph = document.querySelector('.file > a > p');
+                    fileNameString(caminhoParagraph);
 
                     if(result.comment_aluno == null) $('.comentario-aluno').hide();
                     else 

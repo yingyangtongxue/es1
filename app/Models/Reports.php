@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use mysqli;
-use PDOStatement;
+use App\Utils\Errors\InsertDatabaseException;
+use App\Utils\Errors\SendReportException;
+use App\Utils\Errors\UploadException;
 use PDO;
-use PhpParser\Node\Expr\FuncCall;
+use PDOException;
 
 class Reports
 {
@@ -268,9 +269,36 @@ class Reports
         $conn->query($query);
     }
 
-    public static function SendReportOrientando($id_orientando)
-    {
-        $conn = Connection::getConnection();
+
+    private static function UploadPdf($userName){
+
+            if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
+
+                // get details of the uploaded file
+                $fileName = $_FILES['pdf']['name'];
+                $fileNameCmps = explode(".", $_FILES['pdf']['name']);
+                $newFileName = $fileNameCmps[0];
+                $newFileName = $newFileName."_".$userName."_".date("d-m-Y").".pdf";
+    
+                $uploadFileDir = 'docs/reports/';
+                $dest_path = $uploadFileDir . $newFileName;
+    
+                if (move_uploaded_file($_FILES['pdf']['tmp_name'], $dest_path)) {
+                    return "";
+                } else {
+                    $message = 'O Upload do arquivo falhou!!!';
+                   return $message;
+                }
+            }
+            else{
+                $message = 'Ocorreu um problema durante o upload do arquivo.';
+                $message .= 'Error Code: ' . $_FILES['pdf']['error'];
+                return $message;
+            }
+         
+    }
+
+    private static function validateSendReportRequest($conn, $id_orientando){
 
         $query = "SELECT iniciarElaboracao({$id_orientando});";
         
@@ -279,29 +307,67 @@ class Reports
         $row = $result->fetch(PDO::FETCH_ASSOC);
         
         $msg = (array_values($row))[0];
+
+        return $msg;
+    }
+
+    private static function sendReportFunction($conn, $id_orientando, $coment_aluno, $nome_arquivo){
+
+        try{
+            $query = "CALL  enviarElaboracao ({$id_orientando}, '{$coment_aluno}', '{$nome_arquivo}');";
         
-        if($msg == "Relatório já criado/enviado neste semestre!") echo 'teste';
+            $conn->query($query);
+
+            return "";
+        }
+        catch(PDOException $e){
+            return "Error Code: SQLSTATE[".strval($e->getCode())."]. Erro ao inserir no banco.";
+        }
+    }
+
+    public static function SendReportOrientando($id_orientando, $userName)
+    {
+        $conn = Connection::getConnection();
+
+        try {
+
+            if( ($msg = self::validateSendReportRequest($conn, $id_orientando)) != "")  throw new SendReportException($msg);
+
+            if( ($msg = self::UploadPdf($userName)) != "") throw new UploadException($msg);
+
+            $fileNameCmps = explode(".", $_FILES['pdf']['name']);
+            $fileName = $fileNameCmps[0];
+            if(($msg = self::sendReportFunction($conn, $id_orientando, $_POST['comentario'], $fileName)) != "") throw new InsertDatabaseException($msg);
+            
+            
+        } catch (SendReportException $e) {
+            
+            $_SESSION['error'] = $e->errorMessage();
+            header('Location: '.getenv('URL') .'orientando');
+        } catch (UploadException $e) {
+            
+            $_SESSION['error'] = $e->errorMessage();
+            header('Location: '.getenv('URL') .'orientando');
+        } catch (InsertDatabaseException $e) {
+            
+            $_SESSION['error'] = $e->errorMessage();
+            header('Location: '.getenv('URL') .'orientando');
+        }
         
-        /*if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
+    }
 
-            // get details of the uploaded file
-            $fileName = $_FILES['pdf']['name'];
-            $newFileName = $fileName;
+    public static function getPeriod(){
+        $conn = Connection::getConnection();
 
-            $uploadFileDir = 'docs/reports/';
-            $dest_path = $uploadFileDir . $newFileName;
+        $query = "SELECT dataInicio, dataTermino FROM periodo WHERE _aberto = 1";
+        
+        $result = $conn->query($query);
 
-            if (move_uploaded_file($_FILES['pdf']['tmp_name'], $dest_path)) {
-                $message = 'Upload com sucesso.';
-            } else {
-                $message = 'O Upload falhou';
-                echo($message);
-            }
-        } else {
-            $message = 'Ocorreu um problema durante o upload do arquivo. Procure como resolver o Erro gerado.<br>';
-            $message .= 'Error: ' . $_FILES['pdf']['error'];
-            echo($message);
-            header( "refresh:5;url=./" );
-        }*/
+        if ($result->rowCount()) {
+          
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return date_format(date_create($row['dataInicio']), 'd/m/Y'). " - " . date_format(date_create($row['dataTermino']), 'd/m/Y');
+        }
+        else return "FORA DO PERÍODO DE ENVIO";
     }
 }

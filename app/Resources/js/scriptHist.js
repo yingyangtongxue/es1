@@ -4,6 +4,15 @@ let btnDisplayModal = document.querySelectorAll(".modalbutton");
 
 let span = document.getElementsByClassName("close")[0];
 
+function fileNameString(path){
+    let fileNameString = path.innerText.split(/(\\|\/)/g).pop()
+
+    if(fileNameString.length > 40){
+        fileNameString = fileNameString.substring(0,40)+'...'
+    }
+    path.innerText = fileNameString;
+}
+
 function fillModal(id){
              $.ajax({
                 url:"app/Ajax/modalHist.php",    //the page containing php script
@@ -23,6 +32,8 @@ function fillModal(id){
 
                     $('.file > a').attr("href", result.caminho);
                     $('.file > a > p').text(result.caminho);
+                    let caminhoParagraph = document.querySelector('.file > a > p');
+                    fileNameString(caminhoParagraph);
 
                     let inicio = new Date(result.dataInicio);
                     let termino = new Date(result.dataTermino);

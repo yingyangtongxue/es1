@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 
 <div class="main-container">
-    <h1>Envio de Relatório</h1>
+    {{error}}
+    <h1 style="margin-top: 2rem;">Envio de Relatório</h1>
     <div class="relatorio-container">
         <form action="./orientando/sendReport" method="POST" enctype="multipart/form-data">
             <div class="file-container">
                 <div>
                     <h3>Período de Entrega: </h3>
-                    <p></p>
+                    <p>{{periodo}}</p>
                 </div>
                 <label id="file-name" class="label-file" for="upload-pdf"><i class="fas fa-plus"
                         style='margin-right:0.4rem;margin-top: 0.1rem;'></i> Adicionar Relatório</label>
-                <input type="file" name="pdf" id="upload-pdf" accept="application/pdf" />
+                <input type="file" name="pdf" id="upload-pdf" accept="application/pdf" required/>
             </div>
             <div class="comentario-enviar">
                 <textarea id="comentario" name="comentario" placeholder="Comentário..." rows="8" cols="50"
