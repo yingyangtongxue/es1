@@ -52,14 +52,14 @@ function fillModal(id){
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
-                    /*console.log(result.id_aval);
+                    console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
                     console.log(result.nome_prof);
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
                     console.log(result.nota_cpp);
-                    console.log(result.comment_cpp);*/
+                    console.log(result.comment_cpp);
 
                     $('#id_aval').val(result.id_aval);
 
@@ -98,6 +98,7 @@ function fillModal(id){
 
 function clickDisplayModal(event) {
     modal.style.display = "block";
+    document.querySelector('.lote').style.display = "none";
     let p = ((event.target).children[2]);
     if(p == undefined) p = ((event.target).parentElement).children[2];
 
