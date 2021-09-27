@@ -70,7 +70,7 @@ class ccpController extends Controller{
     //Lista Histórico
     private static function listHistory(){
         $reports = Reports::getHistoryCCP();
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+        return ($reports != "") ?  $reports : Views::getContentView("no_reportsHist");
     }
 
     

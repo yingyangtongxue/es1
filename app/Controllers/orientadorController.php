@@ -77,7 +77,7 @@ class orientadorController extends Controller{
     //Lista Histórico
     private static function listHistory($id_orientador){
         $reports = Reports::getHistoryOrientador($id_orientador);
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+        return ($reports != "") ?  $reports : Views::getContentView("no_reportsHist");
     }
 
     

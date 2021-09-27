@@ -64,7 +64,7 @@ class orientandoController extends Controller{
     //Lista Histórico
     private static function listHistory($id_orientando){
         $reports = Reports::getHistoryOrientando($id_orientando);
-        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+        return ($reports != "") ?  $reports : Views::getContentView("no_reportsOrientando");
     }
 
     //Histórico
