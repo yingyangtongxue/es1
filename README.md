@@ -11,7 +11,6 @@ As especificações e instruções detalhadas do trabalho estão disponíveis no
 
 -Daniel Nunes Monteiro \
 -Gabriel Augusto Lima Silva \
--Gabriel Prado Branco Araujo \
 -Lucas Gonçalves Ferreira \
 -Matheus Magalhães da Rocha \
 -Vinícius Pelegrineli Bombarda
