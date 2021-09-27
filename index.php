@@ -4,8 +4,10 @@ require __DIR__.'/vendor/autoload.php';
 
 use \App\Core\Core;
 
-$path = "http://localhost".$_SERVER['REQUEST_URI'];
-putenv("URL=$path");
+
+$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/es1/';
+putenv("URL=$root");
+
 
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
