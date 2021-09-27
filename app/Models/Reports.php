@@ -417,4 +417,85 @@ class Reports
         
         $conn->query($query);
     }
+
+    public static function closePeriod($id_ccp){
+
+        $conn = Connection::getConnection();
+
+        // Adquirindo a ID do período atual
+        $query = "SELECT id_periodo
+        FROM periodo 
+        WHERE _aberto = 1 AND NOW() between dataInicio and dataTermino
+        ORDER BY id_periodo DESC LIMIT 1;";
+        
+        $result = $conn->query($query);
+
+        $periodo = $result->fetch(PDO::FETCH_ASSOC);
+
+        $id_periodo = $periodo['id_periodo'];
+
+
+        //Buscando os orientandos que não fizeram uma elaboração
+        $query = "SELECT ori.id_orientando
+        FROM orientando as ori
+            LEFT JOIN elaboracao as ela
+            ON ori.id_orientando = ela.id_orientando 
+            WHERE ela.id_orientando IS NULL;";
+        
+        $resultOrien = $conn->query($query);
+
+        $arrayIdOrientando = [];
+
+        if ($numOrien = $resultOrien->rowCount()) {
+            while ($row = $resultOrien->fetch(PDO::FETCH_ASSOC))
+            {
+                array_push($arrayIdOrientando, $row['id_orientando']);
+            }
+        }
+
+        //Criar a quantidade de vezes dado pelo SELECT acima o seguinte tipo relatório
+        for($i = 0; $i<$numOrien; $i++)
+        {
+            $query ="INSERT INTO relatorio (id_periodo) VALUES ({$id_periodo});";
+
+            $conn->query($query);
+        }
+
+
+        //Criar a quantidade de vezes dado pelo SELECT acima o seguinte tipo relatório
+        $query = "SELECT id_relatorio FROM relatorio WHERE caminho 
+        IS NULL AND id_periodo = {$id_periodo} ORDER BY id_relatorio DESC;";
+
+        $result = $conn->query($query);
+
+        $arrayIdRelatorio = [];
+
+        if ($result->rowCount()) {
+            while ($row = $result->fetch(PDO::FETCH_ASSOC))
+            {
+                array_push($arrayIdRelatorio, $row['id_relatorio']);
+            }
+        }
+
+        
+       for($i = 0; $i<$numOrien; $i++){
+            $query ="INSERT INTO elaboracao (descricao, dataInicio, dataEnvio, id_orientando, id_relatorio)
+            VALUES ('Finalizado abruptamente devido ao término do período.', 
+            CAST(NOW() AS date), CAST(NOW() AS date), {$arrayIdOrientando[$i]}, {$arrayIdRelatorio[$i]});";
+
+            $conn->query($query);
+
+            $query ="INSERT INTO avaliacao (descricao, id_avalOpcao, id_relatorio, id_orientador, dataAval)
+            VALUES ('Finalizado abruptamente devido ao término do período.', 3, {$arrayIdRelatorio[$i]},{$id_ccp} ,CAST(NOW() AS date));";
+
+            $result = $conn->query($query);
+
+       }
+
+        //Chamando o procedure
+        $query = "CALL fecharPeriodo();";
+
+        $conn->query($query);
+ 
+    }
 }

@@ -146,7 +146,7 @@ class ccpController extends Controller{
             header('Location: '.getenv('URL') .'ccp');
         } else if (isset($_POST['close_button'])) {
                 if(POSTData::postClosePeriod() == "true"){
-                    
+                    Reports::closePeriod($_SESSION['userId']);
                 }
             header('Location: '.getenv('URL') .'ccp');
         } else {
