@@ -6,13 +6,5 @@ php:
   - 8.0.10
 
 script: 
-  script: ./vendor/bin/phpunit 
+  script: vendor/bin/phpunit --debug
 
-notifications:
-  email:
-    - daniel.n.monteiro@unesp.br
-    - gabriel.a.silva@unesp.br
-    - gp.araujo@unesp.br
-    - lucas.g.ferreira@unesp.br
-    - matheus.m.rocha@unesp.br
-    - vinicius.pelegrineli@unesp.br
