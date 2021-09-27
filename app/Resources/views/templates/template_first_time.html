@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{URL}}
+    <link rel="stylesheet" type="text/css" href="app/Resources/css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="app/Resources/images/eachLogo.png" />
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    <title>{{title}}</title>
+
+</head>
+
+<body style="display: flex; justify-content: center;">
+    <section class="first_time">
+        <div class="warning-message">
+            <img src="app/Resources/images/warning.svg" alt="Warning-icon">
+            <p>
+                Olá, detectamos que sua aplicação não possui um database definido, estamos carregando um database
+                com alguns valores default <span>(você pode mudar depois)</span> e terminando
+                as configurações de ambiente neste exato momento.
+            </p>
+            <a href="./"><span>Okay</span></a>
+        </div>
+        <button class="tip" >
+            <span class="iconify tip-icon" data-icon="ic:baseline-privacy-tip"></span>
+            <span class="tooltiptext">
+                O database foi preenchido com 10 pessoas genéricas com emails seguindo o formato: <br>
+                -email0@gmail.com <br>
+                -email1@gmail.com <br>
+                ...               <br>
+                -email9@gmail.com <br>
+                Você pode apagar os valores genéricos do banco e adicionar novas pessoas conforme sua necessidade. <br> <br>
+                Obs: Para os cadastros Orientando e Orientador é necessário o uso do email de uma pessoa da tabela Pessoa. <br>
+            </span>
+        </button>
+    </section>
+</body>
+
+</html>

@@ -54,6 +54,107 @@ a {
     font-size: 1.2rem;
 }
 
+.first_time{
+    margin: 10rem auto;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--bg);
+}
+
+.tip{
+    width: 2.5rem;
+    height: 2.5rem;
+    text-decoration: none;
+    background-color: white;
+    border: none;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+  
+  /* Tooltip text */
+  .tip .tooltiptext {
+    visibility: hidden;
+    width: 30rem;
+    background-color: var(--bg);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-size: 1.2rem;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    margin-left: -20rem;
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+.tip-icon{
+    width: 2rem;
+    height: 2rem;
+    color: var(--bg);
+}
+
+.tip-icon:hover{
+    color:rgb(11, 72, 83);
+}
+
+.warning-message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50rem;
+    height: 30rem;
+    padding: 0 2rem 0 2rem;
+}
+
+.warning-message img{
+    width: 250px;
+    height: 250px;
+}
+
+.warning-message > p{
+    text-align: justify;
+    font-size: 1.5rem;
+}
+
+.warning-message > p > span{
+    color:  var(--bg);
+}
+
+.warning-message > a{
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    background-color:  var(--bg);
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 3rem;
+    border-radius: 20px;  
+    border: 3px solid var(--bg);
+}
+
+.warning-message > a:hover{
+    background-color: white;
+    color: var(--bg);
+}
+
+
 .flex-container {
     display: flex;
     height: 100vh;

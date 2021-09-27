@@ -1,6 +1,6 @@
 Options -Indexes 
 
-<FilesMatch "\.(html|php|env)$">
+<FilesMatch "\.(html|php|env|sql|png|css|jpg|pdf)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
