@@ -1,7 +1,3 @@
--- Setando Timezone correta (Brasil/São Paulo)
-SET @@global.time_zone = '+03:00';
-SET GLOBAL time_zone = '+3:00';
-
 -- Inserindo Pessoas (Esta seção pode ser modificada)
 INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) 
     VALUES ('000000000','00000000000', '2000-01-01', 'Pessoa 0', 'email0@email.br');

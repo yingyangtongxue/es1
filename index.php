@@ -4,8 +4,7 @@ require __DIR__.'/vendor/autoload.php';
 
 use \App\Core\Core;
 
-
-$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/es1/';
+$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . str_replace("index.php", "",getenv('SCRIPT_NAME'));
 putenv("URL=$root");
 
 
