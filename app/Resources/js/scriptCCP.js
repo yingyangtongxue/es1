@@ -35,6 +35,7 @@ function fillModal(id){
                     console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
+                    console.log(result.nome_prof);
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
                     console.log(result.nota_cpp);
@@ -46,6 +47,8 @@ function fillModal(id){
                     $('.file > a > p').text(result.caminho)
                     let caminhoParagraph = document.querySelector('.file > a > p');
                     fileNameString(caminhoParagraph);
+
+                    $('.nome-prof > p').text(result.nome_prof);
 
                     if(result.comment_aluno == null) $('.comentario-aluno').hide();
                     else 

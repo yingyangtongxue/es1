@@ -61,6 +61,11 @@ class orientandoController extends Controller{
         }
     }
 
+    //Lista Histórico
+    private static function listHistory($id_orientando){
+        $reports = Reports::getHistoryOrientando($id_orientando);
+        return ($reports != "") ?  $reports : Views::getContentView("no_reports");
+    }
 
     //Histórico
     public static function history($params)
@@ -68,14 +73,19 @@ class orientandoController extends Controller{
         session_start();
 
         self::checkSession();
+        $reports = self::listHistory($_SESSION['userId']);
         
-        $page = Views::render("template_administrativo","historico_relatorios", [
+        $page = Views::render("template_administrativo","historico_relatoriosOrientando",
+          [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - Orientando',
             'userType' => 'Orientando',
             'userName' => $_SESSION['userName'],
             'logout' => 'href="./logout/index/'.strval(md5(session_id())).'"',
             'menu' => Views::getContentView('menus/menu_orientando')
+          ],
+          [
+            'reports' => $reports
           ]);
 
         echo $page;

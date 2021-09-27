@@ -234,7 +234,46 @@ class Reports
         return $report;
     }
 
+    public static function getHistoryOrientando($id_orientando)
+    {
+        $conn = Connection::getConnection();
 
+        //get no Histórico do Orientando
+        $query = "SELECT e.dataEnvio, r.id_relatorio
+        FROM elaboracao as e
+            inner join relatorio as r
+            on e.id_relatorio = r.id_relatorio
+                inner join avaliacao as av
+                on r.id_relatorio = av.id_relatorio
+        WHERE e.id_orientando = {$id_orientando} AND av.id_aval_pai IS NULL AND e.dataEnvio IS NOT NULL
+        ORDER BY e.dataEnvio, av.dataInicio, av.dataAval;";
+
+        $report = "";
+        $result = $conn->query($query);
+
+        if ($result->rowCount()) {
+            $report =  "<div class='main-container'>
+                            <h1>Histórico de Relatórios - Orientando</h1> 
+                            <div class='historico-relatorios'> 
+                                <ul>";
+            while ($row = $result->fetch(PDO::FETCH_ASSOC))
+            {
+                    $report = $report . "<li class='modalbutton'>
+                                                <i class='fas fa-file'></i>
+                                                <p>
+                                                    Relatório PPgSI     
+                                                </p>
+                                                <p id='id_rel' style='display:none'>" . $row['id_relatorio'] . "</p>
+                                                <p class='date'>
+                                                     " . date_format(date_create($row['dataEnvio']), 'd/m/Y') . "
+                                                </p>
+                                         </li>" . "\n";
+            }
+
+            $report =  $report . "</ul> </div> </div>";
+        }
+        return $report;
+    }
 
     public static function saveReport($id_aval, $nota, $comment_prof){
         $conn = Connection::getConnection();
@@ -301,15 +340,13 @@ class Reports
 
     private static function validateSendReportRequest($conn, $id_orientando){
 
-        $query = "SELECT iniciarElaboracao({$id_orientando});";
+        $query = "SELECT iniciarElaboracao({$id_orientando}) as msg;";
         
         $result = $conn->query($query);
 
         $row = $result->fetch(PDO::FETCH_ASSOC);
         
-        $msg = (array_values($row))[0];
-
-        return $msg;
+        return $row['msg'];
     }
 
     private static function sendReportFunction($conn, $id_orientando, $coment_aluno, $nome_arquivo){
@@ -370,5 +407,14 @@ class Reports
             return date_format(date_create($row['dataInicio']), 'd/m/Y'). " - " . date_format(date_create($row['dataTermino']), 'd/m/Y');
         }
         else return "FORA DO PERÍODO DE ENVIO";
+    }
+
+    public static function openPeriod($data_inicio,$data_fim,$id_orientador){
+
+        $conn = Connection::getConnection();
+
+        $query = "INSERT INTO periodo (dataInicio, dataTermino, _aberto, id_orientador) VALUES ('{$data_inicio}', '{$data_fim}', 1 , $id_orientador);";
+        
+        $conn->query($query);
     }
 }

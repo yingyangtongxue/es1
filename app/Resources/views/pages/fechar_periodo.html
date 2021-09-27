@@ -7,19 +7,21 @@
             <div class="date-container">
                 <h3>Data de Início: </h3>
                 <p class="date-p">
-                    25/09/2021
+                    {{dateStart}}
                 </p>
             </div>
             <div class="date-container">
                 <h3>Data de Término: </h3>
                 <p class="date-p">
-                    26/09/2021
+                    {{dateEnd}}
                 </p>
             </div>
         </div>
 
         <div class="button-periodo">
-            <button class="btn btn-bg" name="send_button" type="submit">Fechar Período</button>
+            <form class="date-form" action="./ccp/updatePeriod" method="POST">
+                <button class="btn btn-bg" name="close_button" type="submit" value="true">Fechar Período</button>
+            </form> 
         </div>
     </div>
 </div>

@@ -106,10 +106,20 @@ class ccpController extends Controller{
         self::checkSession();
 
         $period = Reports::getPeriod();
+        $dateStart = "";
+        $dateEnd = "";
+
+
         if($period == "FORA DO PERÍODO DE ENVIO") $period = 'abrir_periodo';
-        else $period = 'fechar_periodo';
+        else {
+            $arrayPeriod = explode('-',$period);
+            $dateStart = $arrayPeriod[0];
+            $dateEnd = $arrayPeriod[1];
+            $period = 'fechar_periodo';
+        }
         
-        $page = Views::render("template_administrativo",$period, [
+        $page = Views::render("template_administrativo",$period, 
+            [
             'URL' => '<base href="'.getenv('URL').'">',
             'title' => 'Sistema de Avaliação de Desempenho dos alunos do PPgSI - CCP',
             'userType' => 'CCP',
@@ -118,21 +128,36 @@ class ccpController extends Controller{
             'menu' => Views::getContentView('menus/menu_ccp')
             ],
             [
-            
+                'dateStart' => $dateStart,
+                'dateEnd'=> $dateEnd
             ]);
 
         echo $page;
     }
 
-    private static function closePeriod(){
-        
+    public static function updatePeriod(){
+        session_start();
+
+        self::checkSession();
+
+        if (isset($_POST['open_button'])) {
+            $data = POSTData::postOpenPeriod();
+            Reports::openPeriod($data['data_atual'],$data['data_final'],$_SESSION['userId']);
+            header('Location: '.getenv('URL') .'ccp');
+        } else if (isset($_POST['close_button'])) {
+                if(POSTData::postClosePeriod() == "true"){
+                    
+                }
+            header('Location: '.getenv('URL') .'ccp');
+        } else {
+            header('Location: '.getenv('URL') .'');
+        }
+
     }
-
-
 
     public static function getMethods()
     {
-        return ["index", "updateReport","history","period"];
+        return ["index", "updateReport","history","period", "updatePeriod"];
     }
 
 }

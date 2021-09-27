@@ -15,7 +15,7 @@ function fileNameString(path){
 
 function fillModal(id){
              $.ajax({
-                url:"app/Ajax/modalHist.php",    //the page containing php script
+                url:"app/Ajax/modalOrientando.php",    //the page containing php script
                 type: "post",    //request type,
                 dataType: 'json',
                 data: {id_rel: id},
@@ -85,13 +85,3 @@ window.onclick = function (event) {
     }
 }
 
-
-/*let btnRelatorio = document.querySelector("#novo-relatorio")
-
-btnRelatorio.addEventListener('click', () =>{
-    let item = document.createElement('li')
-    let buttonModal = document.createElement('p')
-    buttonModal.classList.add('modalbutton')
-    item.appendChild(buttonModal)
-})
-*/

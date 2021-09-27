@@ -52,4 +52,21 @@ class POSTData{
 
         return array("id_aval" => $id_aval, "select" => $select, "comentario" => $comentario);
     }
+
+    public static function postOpenPeriod(){
+        $data_atual = $_POST['data-atual'];
+        $data_final = $_POST['data-final'];
+
+        unset($_POST['data-atual'], $_POST['data-final']);
+
+        return array("data_atual" => $data_atual,"data_final" => $data_final);
+    }
+
+    public static function postClosePeriod(){
+        $close = $_POST['close_button'];
+
+        unset($_POST['close_button']);
+
+        return $close;
+    }
 }
