@@ -1,13 +1,12 @@
 language: php
-os: linux
-dist: ubuntu
 
 php:
   - 8.0
   - 8.0.3
   - 8.0.10
 
-script: ./vendor/bin/phpunit --colors tests
+script: 
+  script: ./vendor/bin/phpunit 
 
 notifications:
   email:
