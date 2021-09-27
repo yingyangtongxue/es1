@@ -1,4 +1,6 @@
 language: php
+os: linux
+dist: ubuntu
 
 php:
   - 8.0
