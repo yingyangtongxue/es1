@@ -320,6 +320,17 @@ header{
     background: rgba(0, 0, 0, 0.5);
 }
 
+.lote{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.lote label{
+    margin-right: 0.5rem;
+    color: var(--bg);
+}
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;

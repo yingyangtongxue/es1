@@ -16,6 +16,26 @@ document.getElementById('modal-form').addEventListener("submit", function(event)
     
 });
 
+document.getElementById('input-lote').addEventListener('click', function(event) {
+      
+    let select = document.getElementById('select_nota');
+
+    let comment = document.getElementById('comentario');
+
+    let parecerOrientador = document.querySelector('.nota > p');
+
+    let commentOrientador = document.querySelector('.comment-prof > div > p');
+
+
+    if(parecerOrientador.innerText == "ADEQUADO") select.selectedIndex = "1";
+    else if (parecerOrientador.innerText == "ADEQUADO COM RESSALVAS") select.selectedIndex = "2";
+    else select.selectedIndex = "3";
+
+    comment.innerText = commentOrientador.innerText;
+    
+    document.querySelector('.lote').style.display = "none";
+});
+
 function fileNameString(path){
     let fileNameString = path.innerText.split(/(\\|\/)/g).pop()
 
@@ -32,14 +52,14 @@ function fillModal(id){
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
-                    console.log(result.id_aval);
+                    /*console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
                     console.log(result.nome_prof);
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
                     console.log(result.nota_cpp);
-                    console.log(result.comment_cpp);
+                    console.log(result.comment_cpp);*/
 
                     $('#id_aval').val(result.id_aval);
 
@@ -66,6 +86,12 @@ function fillModal(id){
                     else $('#select_nota').val('0');
                     
                     $('#comentario').text(result.comment_cpp)
+
+                    if( (document.querySelector('#select_nota').selectedIndex == 0) && ( document.querySelector('#comentario').innerText == "")) {
+                        let lotebox = document.querySelector('.lote');
+                        lotebox.style.display = "flex";
+                        document.querySelector('#input-lote').checked = false;
+                    }
                 }
             });
 }

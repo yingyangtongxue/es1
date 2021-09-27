@@ -20,7 +20,7 @@ function fillModal(id){
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
-                    console.log(result.caminho);
+                    /*console.log(result.caminho);
                     console.log(result.dataInicio);
                     console.log(result.dataTermino);
                     console.log(result.nome_prof);
@@ -28,7 +28,7 @@ function fillModal(id){
                     console.log(result.nota_prof);
                     console.log(result.comment_prof);
                     console.log(result.nota_cpp);
-                    console.log(result.comment_cpp);
+                    console.log(result.comment_cpp);*/
 
 
                     $('.file > a').attr("href", result.caminho);

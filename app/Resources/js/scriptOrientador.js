@@ -33,11 +33,11 @@ function fillModal(id){
                 dataType: 'json',
                 data: {id_rel: id},
                 success:function(result){
-                    console.log(result.id_aval);
+                    /*console.log(result.id_aval);
                     console.log(result.caminho);
                     console.log(result.comment_aluno);
                     console.log(result.nota);
-                    console.log(result.comment_prof);
+                    console.log(result.comment_prof);*/
 
                     $('#id_aval').val(result.id_aval);
 
