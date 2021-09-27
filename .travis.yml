@@ -2,8 +2,6 @@ language: php
 
 php:
   - 8.0
-  - 8.0.3
-  - 8.0.10
 
 script: 
   script: vendor/bin/phpunit --debug
