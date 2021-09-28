@@ -6,7 +6,7 @@ class TestRegisters
 {
     public function insertTests()
     {
-        $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . "\..");
+        $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . "/..");
         $dotenv->load();
 
         try {
