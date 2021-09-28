@@ -1,25 +1,10 @@
 language: php
+os: linux
+dist: ubuntu
 
 php:
   - 8.0
+  - 8.0.3
+  - 8.0.10
 
-install:
-- travis_retry composer install --no-interaction --no-suggest
-
-before_script: 
-- composer self-update
-- composer install --no-interaction
-
-script: 
-- composer phpunit/phpunit -- --coverage-clover=coverage.xml
-
-after_success:
-- bash <(curl -s https://codecov.io/bash)
-
-branches:
-  only:
-  - main
-
-cache:
-  directories:
-  - $HOME/.composer/cache  
+script: php vendor/bin/phpunit tests
