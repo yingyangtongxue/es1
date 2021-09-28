@@ -29,6 +29,8 @@ class TestRegisters
             $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('345678901','34567890123', '1999-12-12', 'Usuario 3', 'email_valido@novo_orientador.com')");
 
             $conn->query("INSERT INTO pessoa (rg, cpf, dataNasc, nome, email) VALUES ('456789012','45678901234', '1999-12-12', 'Usuario 4', 'email_valido@novo_orientando.com')");
+
+            $conn->query("INSERT INTO avalOpcao (id_avalOpcao, descricao) VALUES (1, 'ADEQUADO'),(2, 'ADEQUADO COM RESSALVAS'),(3, 'INSATISFATÓRIO'),(4, 'NÃO AVALIADO');");
         }
         catch(PDOException $e) {}
     }
@@ -57,5 +59,15 @@ class TestRegisters
         $this->deletePersonWhereRg("345678901");
         $this->deletePersonWhereRg("456789012");
         $this->deletePersonWhereRg("567890123");
+
+        try {
+            $conn = Connection::getConnection();
+
+            $conn->query('DELETE FROM avalOpcao WHERE id_avalOpcao = 1');
+            $conn->query('DELETE FROM avalOpcao WHERE id_avalOpcao = 2');
+            $conn->query('DELETE FROM avalOpcao WHERE id_avalOpcao = 3');
+            $conn->query('DELETE FROM avalOpcao WHERE id_avalOpcao = 4');
+        }
+        catch(PDOException $e) {}
     }
 }
