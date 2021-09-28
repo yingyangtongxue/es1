@@ -18,6 +18,32 @@ body{
 
 }
 
+.modal-content::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+.modal-content::-webkit-scrollbar-track {
+    background: var(--secondary-bg); 
+    border-radius: 20px;       /* color of the tracking area */
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: var(--bg);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+  body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+body::-webkit-scrollbar-track {
+    background: var(--secondary-bg); 
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--bg);    /* color of the scroll thumb */
+  }
+
 a {
     color: var(--bg);
 }
@@ -412,12 +438,12 @@ header{
 
 .modal {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     background: rgba(0, 0, 0, 0.5);
 }
 
@@ -440,6 +466,11 @@ header{
     border: 2px solid var(--bg);
     border-radius: 10px;
     width: 50%;
+    overflow: auto;
+    max-height: 90%;
+    position: absolute;
+    top: 2%;
+    left: 25%;
 }
 
 .modal-content > h1{
@@ -480,6 +511,12 @@ header{
 }
 
 .comentario-orientador .comentario-container, .comentario-ccp .comentario-container{
+    width: 60%;
+    max-height: 6rem;
+    overflow-y: auto;
+}
+
+p.comentario-container{
     width: 60%;
     max-height: 6rem;
     overflow-y: auto;
