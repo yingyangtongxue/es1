@@ -55,6 +55,7 @@ class RelatorioTest extends TestCase
             "INSERT INTO periodo (dataInicio, dataTermino, _aberto, id_orientador)
                 VALUES ('2021-09-01 23:59:59', '2021-10-31 23:59:59', 1, {$id_orientador})"
         );
+        var_dump("Erro em RelatorioTest::testInsertPeriodo: " . $conn->errorCode());
         $this->assertTrue(!!$conn->lastInsertId());
 
         $id_orientador = $this->getIdOrientador("Usuário 5");
@@ -70,6 +71,7 @@ class RelatorioTest extends TestCase
         $conn = Connection::getConnection();
         $stmt = $conn->query("SELECT id_periodo FROM periodo");
         $ids = $stmt->fetchAll();
+        var_dump("Erro em RelatorioTest::testInsertRelatorio: " . $stmt->errorCode());
 
         $conn->query("INSERT INTO relatorio (id_periodo) VALUES ({$ids[0]['id_periodo']})");
         $this->assertTrue(!!$conn->lastInsertId());
@@ -96,7 +98,9 @@ class RelatorioTest extends TestCase
                     {$ids_relatorios[0]['id_relatorio']}
                 )"
         );
+        var_dump("Erro em RelatorioTest::testInsertElaboracao: " . $conn->errorCode());
         $this->assertTrue(!!$conn->lastInsertId());
+        var_dump("Erro em RelatorioTest::testInsertElaboracao: " . $conn->errorCode());
 
         $conn->query(
             "INSERT INTO elaboracao (dataEnvio, descricao, dataInicio, id_orientando, id_relatorio)
@@ -128,7 +132,9 @@ class RelatorioTest extends TestCase
                     {$ids_orientadores[0]['id_orientador']}
                 )"
         );
+        var_dump("Erro em RelatorioTest::testInsertAvaliacao: " . $conn->errorCode());
         $this->assertTrue(!!$conn->lastInsertId());
+        var_dump("Erro em RelatorioTest::testInsertAvaliacao: " . $conn->errorCode());
 
         $conn->query(
             "INSERT INTO avaliacao (dataInicio, id_avalOpcao, id_relatorio, id_orientador)
@@ -168,6 +174,7 @@ class RelatorioTest extends TestCase
             ORDER BY av.dataInicio"
         );
         $result = $stmt->fetchAll();
+        var_dump("Erro em RelatorioTest::testListagemRelatoriosPendentesCCP: " . $conn->errorCode());
         if($ids[0]['_aberto'] == 1) {
             $this->assertEquals($result[0]['dataEnvio'], '2021-09-25');
             $this->assertEquals($result[0]['dataInicio'], '2021-09-16');

@@ -24,6 +24,7 @@ class OrientandoTest extends TestCase{
         $conn = Connection::getConnection();
         $stmt = $conn->query("SELECT id_orientador FROM orientador WHERE user = 'Usuário 1'");
         $stmt->execute();
+        var_dump("Erro em OrientandoTest::getIdOrientador: " . $stmt->errorCode());
         return $stmt->fetch()["id_orientador"];
     }
     
