@@ -5,7 +5,7 @@ O seguinte projeto é um Sistema de Avaliação de Desempenho dos alunos do PPgS
 
 # Especificações do Trabalho🔎:
 
-As especificações e instruções detalhadas do trabalho estão disponíveis no arquivo [TrabalhoES1.pdf](https://github.com/yingyangtongxue/es1/blob/main/Sistema%20-%20Relatorio%20de%20desempenho%20do%20PPgSI.pdf).
+As especificações e instruções detalhadas do trabalho estão disponíveis no arquivo [TrabalhoES1.pdf](https://github.com/yingyangtongxue/es1/blob/main/docs/Sistema%20-%20Relatorio%20de%20desempenho%20do%20PPgSI.pdf).
 
 # Integrantes do Grupo 🛠️:
 
